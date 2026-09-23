@@ -1400,19 +1400,19 @@ html("""
     </td>
 
     <td>
-        <span class="no">✕ NO</span>
+   <span class="yes">✓ YES</span>
     </td>
 
     <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-    <td>
-        <span class="yes">✓ YES</span>
+   <span class="yes">✓ YES</span>
     </td>
 
     <td>
         <span class="yes">✓ YES</span>
+    </td>
+
+    <td>
+   <span class="yes">✓ YES</span>
     </td>
 
 </tr>
@@ -1425,11 +1425,11 @@ html("""
     </td>
 
     <td>
-        <span class="no">✕ NO</span>
+   <span class="yes">✓ YES</span>
     </td>
 
     <td>
-        <span class="no">✕ NO</span>
+   <span class="yes">✓ YES</span>
     </td>
 
     <td>
@@ -1437,7 +1437,7 @@ html("""
     </td>
 
     <td>
-        <span class="no">✕ NO</span>
+   <span class="yes">✓ YES</span>
     </td>
 
 </tr>
@@ -1450,15 +1450,15 @@ html("""
     </td>
 
     <td>
-        <span class="no">✕ NO</span>
+   <span class="yes">✓ YES</span>
     </td>
 
     <td>
-        <span class="no">✕ NO</span>
+   <span class="yes">✓ YES</span>
     </td>
 
     <td>
-        <span class="no">✕ NO</span>
+   <span class="yes">✓ YES</span>
     </td>
 
     <td>
