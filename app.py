@@ -1,5 +1,5 @@
 import streamlit as st
-
+import pandas as pd
 
 # ============================================================
 # PAGE CONFIG
@@ -12,857 +12,254 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-
 # ============================================================
-# HTML RENDER FUNCTION
-# ============================================================
-
-def html(content):
-    st.html(content)
-
-
-# ============================================================
-# GLOBAL CSS
+# CUSTOM CSS
 # ============================================================
 
-html("""
-<style>
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
-
-* {
-    box-sizing: border-box;
-}
-
-html, body {
-    font-family: 'Poppins', sans-serif;
-}
-
-.stApp {
-    background:
-        radial-gradient(
-            circle at 5% 5%,
-            rgba(229, 9, 20, 0.13),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 95% 30%,
-            rgba(100, 50, 180, 0.10),
-            transparent 28%
-        ),
-        linear-gradient(
-            135deg,
-            #05060b 0%,
-            #080a12 50%,
-            #05060b 100%
-        );
-
-    color: white;
-}
-
-header {
-    visibility: hidden;
-}
-
-#MainMenu {
-    visibility: hidden;
-}
-
-footer {
-    visibility: hidden;
-}
-
-.block-container {
-    max-width: 1250px;
-    padding-top: 25px;
-    padding-bottom: 60px;
-}
-
-
-/* ============================================================
-   HERO
-   ============================================================ */
-
-.hero {
-    width: 100%;
-
-    padding: 65px 35px;
-
-    margin-bottom: 55px;
-
-    text-align: center;
-
-    border-radius: 28px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(229, 9, 20, 0.20),
-            rgba(15, 18, 30, 0.97)
-        );
-
-    border: 1px solid rgba(229, 9, 20, 0.40);
-
-    box-shadow:
-        0 0 45px rgba(229, 9, 20, 0.12),
-        inset 0 0 35px rgba(255,255,255,0.015);
-}
-
-.badge {
-    display: inline-block;
-
-    padding: 9px 18px;
-
-    margin-bottom: 20px;
-
-    border-radius: 50px;
-
-    background: rgba(229, 9, 20, 0.14);
-
-    border: 1px solid rgba(229, 9, 20, 0.45);
-
-    color: #ff6872;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-    letter-spacing: 1px;
-}
-
-.hero h1 {
-    margin: 0;
-
-    color: #ffffff;
-
-    font-size: clamp(34px, 5vw, 62px);
-
-    font-weight: 800;
-
-    line-height: 1.15;
-}
-
-.hero p {
-    max-width: 850px;
-
-    margin: 22px auto 0;
-
-    color: #b9becb;
-
-    font-size: 16px;
-
-    line-height: 1.8;
-}
-
-
-/* ============================================================
-   SECTION
-   ============================================================ */
-
-.section {
-    margin-top: 55px;
-
-    margin-bottom: 30px;
-}
-
-.section-title {
-    margin: 0;
-
-    color: #ffffff;
-
-    font-size: 28px;
-
-    font-weight: 800;
-}
-
-.section-line {
-    width: 72px;
-
-    height: 4px;
-
-    margin-top: 13px;
-
-    border-radius: 10px;
-
-    background: #e50914;
-}
-
-
-/* ============================================================
-   GENERAL CARD
-   ============================================================ */
-
-.card {
-    width: 100%;
-
-    min-height: 100%;
-
-    padding: 28px;
-
-    border-radius: 22px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(23, 26, 37, 0.98),
-            rgba(11, 13, 21, 0.98)
-        );
-
-    border: 1px solid rgba(100, 120, 180, 0.20);
-
-    box-shadow:
-        0 12px 35px rgba(0,0,0,0.25),
-        inset 0 0 20px rgba(255,255,255,0.012);
-}
-
-.card-icon {
-    width: 56px;
-
-    height: 56px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    margin-bottom: 18px;
-
-    border-radius: 16px;
-
-    background: rgba(229, 9, 20, 0.12);
-
-    border: 1px solid rgba(229, 9, 20, 0.28);
-
-    font-size: 28px;
-}
-
-.card h3 {
-    margin: 0 0 16px;
-
-    color: #ffffff;
-
-    font-size: 21px;
-
-    font-weight: 700;
-}
-
-.card p {
-    margin: 0;
-
-    color: #aeb5c3;
-
-    font-size: 14px;
-
-    line-height: 1.85;
-}
-
-
-/* ============================================================
-   WORKFLOW
-   ============================================================ */
-
-.workflow {
-    min-height: 245px;
-
-    padding: 25px;
-
-    border-radius: 20px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(20, 23, 34, 0.98),
-            rgba(10, 12, 20, 0.98)
-        );
-
-    border: 1px solid rgba(100, 120, 180, 0.18);
-
-    transition: transform 0.25s ease;
-}
-
-.workflow:hover {
-    transform: translateY(-4px);
-
-    border-color: rgba(229, 9, 20, 0.45);
-}
-
-.number {
-    width: 48px;
-
-    height: 48px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    margin-bottom: 18px;
-
-    border-radius: 14px;
-
-    background: rgba(229, 9, 20, 0.13);
-
-    border: 1px solid rgba(229, 9, 20, 0.30);
-
-    color: #ff5963;
-
-    font-size: 15px;
-
-    font-weight: 800;
-}
-
-.workflow h4 {
-    margin: 0 0 12px;
-
-    color: #ffffff;
-
-    font-size: 18px;
-
-    font-weight: 700;
-}
-
-.workflow p {
-    margin: 0;
-
-    color: #9fa6b5;
-
-    font-size: 13px;
-
-    line-height: 1.7;
-}
-
-
-/* ============================================================
-   APPLICATION
-   ============================================================ */
-
-.application {
-    min-height: 255px;
-
-    padding: 27px;
-
-    border-radius: 21px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(22, 25, 36, 0.98),
-            rgba(11, 13, 21, 0.98)
-        );
-
-    border: 1px solid rgba(100, 120, 180, 0.18);
-}
-
-.application-icon {
-    width: 55px;
-
-    height: 55px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    margin-bottom: 18px;
-
-    border-radius: 16px;
-
-    background: rgba(229, 9, 20, 0.12);
-
-    font-size: 27px;
-}
-
-.application h3 {
-    margin: 0 0 12px;
-
-    color: white;
-
-    font-size: 19px;
-}
-
-.application p {
-    margin: 0;
-
-    color: #aeb4c2;
-
-    font-size: 13px;
-
-    line-height: 1.75;
-}
-
-
-/* ============================================================
-   TECHNOLOGIES
-   ============================================================ */
-
-.tech {
-    padding: 25px;
-
-    margin-bottom: 20px;
-
-    text-align: center;
-
-    border-radius: 20px;
-
-    background: rgba(18, 21, 31, 0.96);
-
-    border: 1px solid rgba(100, 120, 180, 0.18);
-}
-
-.tech-icon {
-    font-size: 36px;
-
-    margin-bottom: 12px;
-}
-
-.tech h3 {
-    margin: 0;
-
-    color: #ffffff;
-
-    font-size: 17px;
-}
-
-
-/* ============================================================
-   TEAM
-   ============================================================ */
-
-.team {
-    padding: 28px 20px;
-
-    margin-bottom: 20px;
-
-    text-align: center;
-
-    border-radius: 22px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(22, 25, 36, 0.98),
-            rgba(11, 13, 21, 0.98)
-        );
-
-    border: 1px solid rgba(100, 120, 180, 0.18);
-
-    min-height: 190px;
-}
-
-.team-icon {
-    width: 68px;
-
-    height: 68px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    margin: 0 auto 17px;
-
-    border-radius: 50%;
-
-    background: rgba(229, 9, 20, 0.12);
-
-    border: 1px solid rgba(229, 9, 20, 0.30);
-
-    font-size: 29px;
-}
-
-.team h3 {
-    margin: 0 0 8px;
-
-    color: white;
-
-    font-size: 17px;
-}
-
-.team p {
-    margin: 0;
-
-    color: #a7adba;
-
-    font-size: 12px;
-
-    line-height: 1.6;
-}
-
-
-/* ============================================================
-   NOTE
-   ============================================================ */
-
-.note {
-    padding: 16px 18px;
-
-    margin-bottom: 20px;
-
-    border-radius: 14px;
-
-    background: rgba(255,255,255,0.035);
-
-    border: 1px solid rgba(255,255,255,0.08);
-
-    color: #aeb4c2;
-
-    font-size: 13px;
-}
-
-.yes-text {
-    color: #48f2a5;
-
-    font-weight: 700;
-}
-
-.no-text {
-    color: #ff7185;
-
-    font-weight: 700;
-}
-
-
-/* ============================================================
-   TABLE
-   ============================================================ */
-
-.table-box {
-    width: 100%;
-
-    overflow-x: auto;
-
-    border-radius: 18px;
-
-    background: #0c0f17;
-
-    border: 1px solid rgba(100,120,180,0.18);
-}
-
-table {
-    width: 100%;
-
-    min-width: 900px;
-
-    border-collapse: collapse;
-}
-
-th {
-    padding: 17px 15px;
-
-    background: rgba(229,9,20,0.12);
-
-    color: #ffffff;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-    text-align: left;
-
-    border-bottom: 1px solid rgba(229,9,20,0.25);
-}
-
-td {
-    padding: 16px 15px;
-
-    color: #c3c8d2;
-
-    font-size: 13px;
-
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-
-tr:hover td {
-    background: rgba(255,255,255,0.025);
-}
-
-.yes {
-    color: #48f2a5;
-
-    font-weight: 700;
-
-    white-space: nowrap;
-}
-
-.no {
-    color: #ff7185;
-
-    font-weight: 700;
-
-    white-space: nowrap;
-}
-
-
-/* ============================================================
-   OUTCOME
-   ============================================================ */
-
-.outcome {
-    padding: 32px;
-
-    border-radius: 23px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(229,9,20,0.13),
-            rgba(20,23,34,0.98)
-        );
-
-    border: 1px solid rgba(229,9,20,0.25);
-}
-
-.outcome h3 {
-    margin: 0 0 16px;
-
-    color: #ffffff;
-
-    font-size: 23px;
-}
-
-.outcome p {
-    margin: 0;
-
-    color: #b3bac7;
-
-    font-size: 14px;
-
-    line-height: 1.9;
-}
-
-
-/* ============================================================
-   FOOTER
-   ============================================================ */
-
-.custom-footer {
-    margin-top: 65px;
-
-    padding: 30px;
-
-    text-align: center;
-
-    border-top: 1px solid rgba(255,255,255,0.08);
-
-    color: #8d94a3;
-
-    font-size: 13px;
-
-    line-height: 1.8;
-}
-
-.custom-footer strong {
-    color: #ffffff;
-}
-
-
-/* ============================================================
-   MOBILE
-   ============================================================ */
-
-@media (max-width: 768px) {
+st.markdown(
+    """
+    <style>
+
+    .stApp {
+        background-color: #05070d;
+    }
 
     .block-container {
-        padding-left: 12px;
-
-        padding-right: 12px;
-
-        padding-top: 15px;
+        max-width: 1200px;
+        padding-top: 2rem;
+        padding-bottom: 3rem;
     }
 
-    .hero {
-        padding: 42px 20px;
-
-        border-radius: 22px;
+    .hero-box {
+        padding: 45px;
+        border-radius: 25px;
+        background: linear-gradient(
+            135deg,
+            #180811,
+            #11151f
+        );
+        border: 1px solid #343846;
+        margin-bottom: 35px;
     }
 
-    .hero h1 {
-        font-size: 34px;
+    .badge {
+        color: #ff4d6d;
+        font-weight: 800;
+        letter-spacing: 1px;
+        font-size: 14px;
     }
 
-    .hero p {
-        font-size: 13px;
+    .hero-title {
+        font-size: 46px;
+        font-weight: 900;
+        color: white;
+        margin-top: 12px;
     }
 
-    .section-title {
-        font-size: 23px;
+    .hero-description {
+        color: #c7cbd4;
+        font-size: 17px;
+        line-height: 1.8;
+        max-width: 900px;
+        margin-top: 15px;
     }
 
     .card {
-        padding: 23px;
+        background-color: #11151f;
+        border: 1px solid #303542;
+        border-radius: 18px;
+        padding: 25px;
+        margin-bottom: 18px;
+        min-height: 150px;
     }
 
-    .workflow {
-        min-height: auto;
+    .card-title {
+        color: white;
+        font-size: 20px;
+        font-weight: 800;
+        margin-bottom: 10px;
     }
 
-}
+    .card-text {
+        color: #c6cad3;
+        line-height: 1.7;
+        font-size: 15px;
+    }
 
-</style>
-""")
+    .number {
+        color: #ff3155;
+        font-size: 28px;
+        font-weight: 900;
+    }
 
+    .team-card {
+        background-color: #11151f;
+        border: 1px solid #303542;
+        border-radius: 18px;
+        padding: 25px;
+        text-align: center;
+        min-height: 150px;
+    }
+
+    .team-name {
+        color: white;
+        font-size: 19px;
+        font-weight: 800;
+    }
+
+    .team-role {
+        color: #aeb4c0;
+        margin-top: 8px;
+    }
+
+    .footer {
+        text-align: center;
+        color: #8f95a3;
+        padding-top: 35px;
+        padding-bottom: 20px;
+    }
+
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # ============================================================
-# HERO
+# HERO SECTION
 # ============================================================
 
-html("""
-<div class="hero">
+st.markdown(
+    """
+    <div class="hero-box">
 
-    <div class="badge">
-        🎬 MACHINE LEARNING PROJECT
+        <div class="badge">
+            🎬 MACHINE LEARNING PROJECT
+        </div>
+
+        <div class="hero-title">
+            Movie Recommendation System
+        </div>
+
+        <div class="hero-description">
+            A Content-Based Movie Recommendation System that recommends
+            movies according to the similarity between their features,
+            genres, keywords, cast, crew and other important information.
+        </div>
+
     </div>
-
-    <h1>
-        Movie Recommendation System
-    </h1>
-
-    <p>
-        A Content-Based Movie Recommendation System that recommends
-        movies according to the similarity between their features,
-        genres, keywords, cast, crew and other important information.
-    </p>
-
-</div>
-""")
-
+    """,
+    unsafe_allow_html=True
+)
 
 # ============================================================
 # PROJECT INTRODUCTION
 # ============================================================
 
-html("""
-<div class="section">
+st.header("🎬 Project Introduction")
 
-    <div class="section-title">
-        🎬 Project Introduction
-    </div>
+st.subheader("🎞️ What is a Movie Recommendation System?")
 
-    <div class="section-line"></div>
+st.write(
+    "A Movie Recommendation System is a Machine Learning based "
+    "system that helps users discover movies according to their interests."
+)
 
-</div>
-""")
+st.write(
+    "Instead of manually searching through thousands of movies, "
+    "the system analyzes movie information and recommends movies "
+    "that are similar to the movie selected by the user."
+)
 
+st.write(
+    "Our project uses a Content-Based Filtering approach. "
+    "The system analyzes different features of movies such as "
+    "genres, keywords, cast, crew and other textual information."
+)
 
-col1, col2 = st.columns(2)
+st.write(
+    "These features are converted into numerical vectors and "
+    "their similarity is calculated using mathematical techniques."
+)
 
+st.write(
+    "When a user selects a movie, the system compares that movie "
+    "with other movies and displays the most similar movies."
+)
 
-with col1:
-
-    html("""
-    <div class="card">
-
-        <div class="card-icon">
-            🎞️
-        </div>
-
-        <h3>
-            What is a Movie Recommendation System?
-        </h3>
-
-        <p>
-
-            A Movie Recommendation System is a Machine Learning based
-            system that helps users discover movies according to their
-            interests.
-
-            <br><br>
-
-            Instead of manually searching through thousands of movies,
-            the system analyzes movie information and recommends movies
-            that are similar to the movie selected by the user.
-
-            <br><br>
-
-            Our project uses a
-            <b>Content-Based Filtering</b>
-            approach.
-
-            The system analyzes different features of movies such as
-            genres, keywords, cast, crew and other textual information.
-
-            <br><br>
-
-            These features are converted into numerical vectors and
-            their similarity is calculated using mathematical techniques.
-
-            <br><br>
-
-            When a user selects a movie, the system compares that movie
-            with other movies and displays the most similar movies.
-
-        </p>
-
-    </div>
-    """)
-
-
-with col2:
-
-    html("""
-    <div class="card">
-
-        <div class="card-icon">
-            🎯
-        </div>
-
-        <h3>
-            Project Objectives
-        </h3>
-
-        <p>
-
-            <b>🔎 Easy Discovery</b>
-
-            <br>
-
-            Help users discover movies without manually searching through
-            a huge movie collection.
-
-            <br><br>
-
-            <b>🤖 Machine Learning</b>
-
-            <br>
-
-            Use Machine Learning and Natural Language Processing techniques
-            to generate movie recommendations.
-
-            <br><br>
-
-            <b>⚡ Fast Recommendation</b>
-
-            <br>
-
-            Provide relevant movie recommendations quickly after the user
-            selects a movie.
-
-        </p>
-
-    </div>
-    """)
-
+st.divider()
 
 # ============================================================
-# WORKFLOW
+# PROJECT OBJECTIVES
 # ============================================================
 
-html("""
-<div class="section">
+st.header("🎯 Project Objectives")
 
-    <div class="section-title">
-        ⚙️ How Our System Works
-    </div>
+c1, c2, c3 = st.columns(3)
 
-    <div class="section-line"></div>
+with c1:
+    st.markdown(
+        """
+        <div class="card">
 
-</div>
-""")
+            <div class="card-title">
+                🔎 Easy Discovery
+            </div>
 
+            <div class="card-text">
+                Help users discover movies without manually searching
+                through a huge movie collection.
+            </div>
+
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+with c2:
+    st.markdown(
+        """
+        <div class="card">
+
+            <div class="card-title">
+                🤖 Machine Learning
+            </div>
+
+            <div class="card-text">
+                Use Machine Learning and Natural Language Processing
+                techniques to generate movie recommendations.
+            </div>
+
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+with c3:
+    st.markdown(
+        """
+        <div class="card">
+
+            <div class="card-title">
+                ⚡ Fast Recommendation
+            </div>
+
+            <div class="card-text">
+                Provide relevant movie recommendations quickly after
+                the user selects a movie.
+            </div>
+
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+st.divider()
+
+# ============================================================
+# HOW SYSTEM WORKS
+# ============================================================
+
+st.header("⚙️ How Our System Works")
 
 workflow = [
 
@@ -916,139 +313,125 @@ workflow = [
 
 ]
 
-
-for start in range(0, 8, 4):
+for start in range(0, len(workflow), 4):
 
     cols = st.columns(4)
 
-    for col, item in zip(cols, workflow[start:start + 4]):
+    for col, item in zip(
+        cols,
+        workflow[start:start + 4]
+    ):
 
         number, title, description = item
 
         with col:
 
-            html(f"""
-            <div class="workflow">
+            st.markdown(
+                f"""
+                <div class="card">
 
-                <div class="number">
-                    {number}
+                    <div class="number">
+                        {number}
+                    </div>
+
+                    <div class="card-title">
+                        {title}
+                    </div>
+
+                    <div class="card-text">
+                        {description}
+                    </div>
+
                 </div>
+                """,
+                unsafe_allow_html=True
+            )
 
-                <h4>
-                    {title}
-                </h4>
-
-                <p>
-                    {description}
-                </p>
-
-            </div>
-            """)
-
+st.divider()
 
 # ============================================================
-# REAL-LIFE APPLICATIONS
+# REAL LIFE APPLICATIONS
 # ============================================================
 
-html("""
-<div class="section">
-
-    <div class="section-title">
-        🌐 Real-Life Applications
-    </div>
-
-    <div class="section-line"></div>
-
-</div>
-""")
-
+st.header("🌐 Real-Life Applications")
 
 applications = [
 
     (
-        "🎥",
-        "OTT Platforms",
-        "Recommendation systems can help OTT platforms suggest movies and shows based on the content users are interested in."
+        "🎥 OTT Platforms",
+        "Recommendation systems can help OTT platforms suggest movies "
+        "and shows based on the content users are interested in."
     ),
 
     (
-        "🍿",
-        "Streaming Services",
-        "Streaming platforms can help users discover relevant movies without searching through a large catalogue."
+        "🍿 Streaming Services",
+        "Streaming platforms can help users discover relevant movies "
+        "without searching through a large catalogue."
     ),
 
     (
-        "🎬",
-        "Movie Websites",
-        "Movie websites can recommend similar movies when a user opens the details of a particular movie."
+        "🎬 Movie Websites",
+        "Movie websites can recommend similar movies when a user "
+        "opens the details of a particular movie."
     ),
 
     (
-        "📱",
-        "Entertainment Apps",
-        "Entertainment applications can personalize content discovery using recommendation algorithms."
+        "📱 Entertainment Apps",
+        "Entertainment applications can personalize content discovery "
+        "using recommendation algorithms."
     ),
 
     (
-        "🛒",
-        "E-Commerce",
-        "The same recommendation concept can be applied to recommend products similar to a product selected by a customer."
+        "🛒 E-Commerce",
+        "The same recommendation concept can be applied to recommend "
+        "products similar to a product selected by a customer."
     ),
 
     (
-        "🎵",
-        "Music Recommendation",
-        "A similar content-based approach can recommend songs or artists based on their features."
+        "🎵 Music Recommendation",
+        "A similar content-based approach can recommend songs or artists "
+        "based on their features."
     )
 
 ]
 
-
-for start in range(0, 6, 3):
+for start in range(0, len(applications), 3):
 
     cols = st.columns(3)
 
-    for col, item in zip(cols, applications[start:start + 3]):
-
-        icon, title, description = item
+    for col, (title, description) in zip(
+        cols,
+        applications[start:start + 3]
+    ):
 
         with col:
 
-            html(f"""
-            <div class="application">
+            st.markdown(
+                f"""
+                <div class="card">
 
-                <div class="application-icon">
-                    {icon}
+                    <div class="card-title">
+                        {title}
+                    </div>
+
+                    <div class="card-text">
+                        {description}
+                    </div>
+
                 </div>
+                """,
+                unsafe_allow_html=True
+            )
 
-                <h3>
-                    {title}
-                </h3>
-
-                <p>
-                    {description}
-                </p>
-
-            </div>
-            """)
-
+st.divider()
 
 # ============================================================
 # TECHNOLOGIES
 # ============================================================
 
-html("""
-<div class="section">
+st.header("💻 Technologies Used")
 
-    <div class="section-title">
-        💻 Technologies Used
-    </div>
-
-    <div class="section-line"></div>
-
-</div>
-""")
-
+tech_cols = st.columns(5)
 
 technologies = [
 
@@ -1060,705 +443,349 @@ technologies = [
 
 ]
 
-
-cols = st.columns(5)
-
-
-for col, item in zip(cols, technologies):
-
-    icon, name = item
+for col, (icon, name) in zip(
+    tech_cols,
+    technologies
+):
 
     with col:
 
-        html(f"""
-        <div class="tech">
+        st.markdown(
+            f"""
+            <div class="team-card">
 
-            <div class="tech-icon">
-                {icon}
+                <div style="font-size:35px;">
+                    {icon}
+                </div>
+
+                <div class="team-name">
+                    {name}
+                </div>
+
             </div>
+            """,
+            unsafe_allow_html=True
+        )
 
-            <h3>
-                {name}
-            </h3>
-
-        </div>
-        """)
-
+st.divider()
 
 # ============================================================
 # PROJECT TEAM
 # ============================================================
 
-html("""
-<div class="section">
-
-    <div class="section-title">
-        👥 Project Team
-    </div>
-
-    <div class="section-line"></div>
-
-</div>
-""")
-
-
-# CORRECT 4 MEMBERS
+st.header("👥 Project Team")
 
 team = [
 
     (
-        "👔",
         "Abar Ahmad",
         "Special Project Manager"
     ),
 
     (
-        "👨‍💻",
         "Anish",
         "Team Leader & Coder"
     ),
 
     (
-        "🧮",
         "Abhishek",
         "Mathematical Logic"
     ),
 
     (
-        "🎨",
         "Vishal",
         "Frontend"
     )
 
 ]
 
+team_cols = st.columns(4)
 
-cols = st.columns(4)
-
-
-for col, member in zip(cols, team):
-
-    icon, name, role = member
+for col, (name, role) in zip(
+    team_cols,
+    team
+):
 
     with col:
 
-        html(f"""
-        <div class="team">
+        st.markdown(
+            f"""
+            <div class="team-card">
 
-            <div class="team-icon">
-                {icon}
+                <div style="font-size:38px;">
+                    👤
+                </div>
+
+                <div class="team-name">
+                    {name}
+                </div>
+
+                <div class="team-role">
+                    {role}
+                </div>
+
             </div>
+            """,
+            unsafe_allow_html=True
+        )
 
-            <h3>
-                {name}
-            </h3>
-
-            <p>
-                {role}
-            </p>
-
-        </div>
-        """)
-
+st.divider()
 
 # ============================================================
 # TEAM CONTRIBUTION
 # ============================================================
 
-html("""
-<div class="section">
+st.header("📊 Team Contribution")
 
-    <div class="section-title">
-        📊 Team Contribution
-    </div>
+st.write(
+    "✓ YES = Member is involved in that particular work."
+)
 
-    <div class="section-line"></div>
-
-</div>
-""")
-
-
-html("""
-<div class="note">
-
-    <b>Note:</b>
-
-    <span class="yes-text">YES</span>
-    = Member is involved in that particular part.
-
-    &nbsp;&nbsp;&nbsp;&nbsp;
-
-    <span class="no-text">NO</span>
-    = Member is not involved in that particular part.
-
-</div>
-""")
-
+st.write(
+    "✕ NO = Member is not involved in that particular work."
+)
 
 # ============================================================
-# CONTRIBUTION TABLE
+# IMPORTANT:
+# ALL REQUESTED YES VALUES ARE SET HERE
 # ============================================================
 
-html("""
-<div class="table-box">
+contribution_data = [
+
+    [
+        "To Make Recommendation System",
+        "YES",
+        "YES",
+        "YES",
+        "YES"
+    ],
+
+    [
+        "Data Collections",
+        "YES",
+        "YES",
+        "YES",
+        "YES"
+    ],
+
+    [
+        "Data Cleaning",
+        "YES",
+        "YES",
+        "YES",
+        "YES"
+    ],
+
+    [
+        "Bag of Words",
+        "NO",
+        "YES",
+        "YES",
+        "NO"
+    ],
+
+    [
+        "Similarity Matrix",
+        "NO",
+        "YES",
+        "YES",
+        "NO"
+    ],
+
+    [
+        "Vectorization",
+        "NO",
+        "YES",
+        "YES",
+        "NO"
+    ],
+
+    [
+        "Cosine Matrix",
+        "NO",
+        "YES",
+        "YES",
+        "NO"
+    ],
+
+    [
+        "Result",
+        "YES",
+        "YES",
+        "YES",
+        "YES"
+    ],
+
+    [
+        "Deployment",
+        "YES",
+        "YES",
+        "YES",
+        "YES"
+    ],
+
+    [
+        "UI / Web Development",
+        "YES",
+        "YES",
+        "YES",
+        "YES"
+    ],
+
+    [
+        "Project Management",
+        "YES",
+        "NO",
+        "NO",
+        "NO"
+    ]
+
+]
+
+contribution_df = pd.DataFrame(
+
+    contribution_data,
+
+    columns=[
+        "Project Work",
+        "Abar Ahmad",
+        "Anish",
+        "Abhishek",
+        "Vishal"
+    ]
 
-<table>
+)
 
-<thead>
+# Native Streamlit table
+# No HTML table is used here.
 
-<tr>
-    <th>Project Work</th>
-    <th>Abar Ahmad</th>
-    <th>Anish</th>
-    <th>Abhishek</th>
-    <th>Vishal</th>
-</tr>
+st.table(contribution_df)
 
-</thead>
-
-<tbody>
-
-<tr>
-
-    <td>
-        <b>To Make Recommendation System</b>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-</tr>
-
-
-<tr>
-
-    <td>
-        <b>Data Collection</b>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-</tr>
-
-
-<tr>
-
-    <td>
-        <b>Data Cleaning</b>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-    <td>
-        <span class="yes">✓ YES</span>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-</tr>
-
-
-<tr>
-
-    <td>
-        <b>Bag of Words</b>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-    <td>
-        <span class="yes">✓ YES</span>
-    </td>
-
-    <td>
-        <span class="yes">✓ YES</span>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-</tr>
-
-
-<tr>
-
-    <td>
-        <b>Similarity Matrix</b>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-    <td>
-        <span class="yes">✓ YES</span>
-    </td>
-
-    <td>
-        <span class="yes">✓ YES</span>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-</tr>
-
-
-<tr>
-
-    <td>
-        <b>Vectorization</b>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-    <td>
-        <span class="yes">✓ YES</span>
-    </td>
-
-    <td>
-        <span class="yes">✓ YES</span>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-</tr>
-
-
-<tr>
-
-    <td>
-        <b>Cosine Matrix</b>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-    <td>
-        <span class="yes">✓ YES</span>
-    </td>
-
-    <td>
-        <span class="yes">✓ YES</span>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-</tr>
-
-
-<tr>
-
-    <td>
-        <b>Result</b>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-    <td>
-        <span class="yes">✓ YES</span>
-    </td>
-
-    <td>
-        <span class="yes">✓ YES</span>
-    </td>
-
-</tr>
-
-
-<tr>
-
-    <td>
-        <b>Deployment</b>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-    <td>
-        <span class="yes">✓ YES</span>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-</tr>
-
-
-<tr>
-
-    <td>
-        <b>UI / Web Development</b>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-    <td>
-        <span class="no">✕ NO</span>
-    </td>
-
-    <td>
-        <span class="yes">✓ YES</span>
-    </td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-""")
-
+st.divider()
 
 # ============================================================
 # DETAILED CONTRIBUTION
 # ============================================================
 
-html("""
-<div class="section">
-
-    <div class="section-title">
-        📝 Detailed Contribution
-    </div>
-
-    <div class="section-line"></div>
-
-</div>
-""")
-
-
-html("""
-<div class="table-box">
-
-<table>
-
-<thead>
-
-<tr>
-    <th>Project Work</th>
-    <th>Member</th>
-    <th>Contribution</th>
-</tr>
-
-</thead>
-
-<tbody>
-
-
-<tr>
-
-    <td>
-        <b>Data Cleaning</b>
-    </td>
-
-    <td>
-        Abhishek
-    </td>
-
-    <td>
-        Data cleaning and preparation of useful movie information.
-    </td>
-
-</tr>
-
-
-<tr>
-
-    <td>
-        <b>Bag of Words</b>
-    </td>
-
-    <td>
-        Anish &amp; Abhishek
-    </td>
-
-    <td>
-        Creation of the textual feature representation used by
-        the recommendation model.
-    </td>
-
-</tr>
-
-
-<tr>
-
-    <td>
-        <b>Similarity Matrix</b>
-    </td>
-
-    <td>
-        Anish &amp; Abhishek
-    </td>
-
-    <td>
-        Calculation and preparation of movie similarity information.
-    </td>
-
-</tr>
-
-
-<tr>
-
-    <td>
-        <b>Vectorization</b>
-    </td>
-
-    <td>
-        Anish &amp; Abhishek
-    </td>
-
-    <td>
-        Conversion of selected textual features into numerical vectors.
-    </td>
-
-</tr>
-
-
-<tr>
-
-    <td>
-        <b>Cosine Matrix</b>
-    </td>
-
-    <td>
-        Anish &amp; Abhishek
-    </td>
-
-    <td>
-        Calculation of cosine similarity between movie vectors.
-    </td>
-
-</tr>
-
-
-<tr>
-
-    <td>
-        <b>Result</b>
-    </td>
-
-    <td>
-        Abhishek &amp; Vishal
-    </td>
-
-    <td>
-        Displaying recommendation results through the application interface.
-    </td>
-
-</tr>
-
-
-<tr>
-
-    <td>
-        <b>Deployment</b>
-    </td>
-
-    <td>
-        Abhishek
-    </td>
-
-    <td>
-        Deployment and configuration of the Streamlit web application.
-    </td>
-
-</tr>
-
-
-<tr>
-
-    <td>
-        <b>UI / Web Development</b>
-    </td>
-
-    <td>
-        Vishal
-    </td>
-
-    <td>
-        Frontend design and user-interface development.
-    </td>
-
-</tr>
-
-
-<tr>
-
-    <td>
-        <b>Project Management</b>
-    </td>
-
-    <td>
-        Abar Ahmad
-    </td>
-
-    <td>
-        Special project management and overall project coordination.
-    </td>
-
-</tr>
-
-
-</tbody>
-
-</table>
-
-</div>
-""")
-
+st.header("📝 Detailed Contribution")
+
+detailed_data = [
+
+    [
+        "Project Management",
+        "Abar Ahmad",
+        "Special project management and overall project coordination."
+    ],
+
+    [
+        "Data Collections",
+        "Abar Ahmad, Anish, Abhishek & Vishal",
+        "Collection of movie data and required project information."
+    ],
+
+    [
+        "Data Cleaning",
+        "Abar Ahmad, Anish, Abhishek & Vishal",
+        "Cleaning and preparation of useful movie information."
+    ],
+
+    [
+        "Bag of Words",
+        "Anish & Abhishek",
+        "Creation of textual feature representation used by the recommendation model."
+    ],
+
+    [
+        "Similarity Matrix",
+        "Anish & Abhishek",
+        "Calculation and preparation of movie similarity information."
+    ],
+
+    [
+        "Vectorization",
+        "Anish & Abhishek",
+        "Conversion of selected textual features into numerical vectors."
+    ],
+
+    [
+        "Cosine Matrix",
+        "Anish & Abhishek",
+        "Calculation of cosine similarity between movie vectors."
+    ],
+
+    [
+        "Result",
+        "Abar Ahmad, Anish, Abhishek & Vishal",
+        "Displaying and presenting recommendation results through the application."
+    ],
+
+    [
+        "Deployment",
+        "Abar Ahmad, Anish, Abhishek & Vishal",
+        "Deployment and configuration of the Streamlit web application."
+    ],
+
+    [
+        "UI / Web Development",
+        "Abar Ahmad, Anish, Abhishek & Vishal",
+        "Frontend design and user-interface development."
+    ]
+
+]
+
+detailed_df = pd.DataFrame(
+
+    detailed_data,
+
+    columns=[
+        "Project Work",
+        "Member",
+        "Contribution"
+    ]
+
+)
+
+st.dataframe(
+    detailed_df,
+    use_container_width=True,
+    hide_index=True
+)
+
+st.divider()
 
 # ============================================================
 # PROJECT OUTCOME
 # ============================================================
 
-html("""
-<div class="section">
+st.header("🏆 Project Outcome")
 
-    <div class="section-title">
-        🏆 Project Outcome
-    </div>
+st.subheader("🎬 Final Result")
 
-    <div class="section-line"></div>
+st.write(
+    "The final result is an interactive web-based "
+    "Movie Recommendation System where users can select "
+    "a movie and receive recommendations for similar movies."
+)
 
-</div>
-""")
+st.write(
+    "The project combines Machine Learning, Natural Language "
+    "Processing, Mathematics, Python Programming and Web "
+    "Development into a single practical application."
+)
 
+st.write(
+    "The system demonstrates how Machine Learning techniques "
+    "can be used to solve a real-world content recommendation problem."
+)
 
-html("""
-<div class="outcome">
-
-    <h3>
-        🎬 Final Result
-    </h3>
-
-    <p>
-
-        The final result is an interactive web-based
-        <b>Movie Recommendation System</b>
-        where users can select a movie and receive recommendations
-        for similar movies.
-
-        <br><br>
-
-        The project combines
-        <b>
-            Machine Learning,
-            Natural Language Processing,
-            Mathematics,
-            Python Programming
-        </b>
-        and
-        <b>
-            Web Development
-        </b>
-        into a single practical application.
-
-        <br><br>
-
-        The system demonstrates how Machine Learning techniques can
-        be used to solve a real-world content recommendation problem.
-
-    </p>
-
-</div>
-""")
-
+st.divider()
 
 # ============================================================
 # FOOTER
 # ============================================================
 
-html("""
-<div class="custom-footer">
-
-    🎬
-
-    <br>
-
-    <strong>
-        Movie Recommendation System
-    </strong>
-
-    <br>
-
-    Machine Learning Project
-
-    <br><br>
-
-    Developed by
-
-    <strong>Abar Ahmad</strong>
-    •
-    <strong>Anish</strong>
-    •
-    <strong>Abhishek</strong>
-    •
-    <strong>Vishal</strong>
-
-</div>
-""")
+st.caption("🎬 Movie Recommendation System")
+st.caption("Machine Learning Project")
+st.caption(
+    "Developed by Abar Ahmad • Anish • Abhishek • Vishal"
+)
