@@ -1,4 +1,6 @@
 import streamlit as st
+import textwrap
+
 
 # ============================================================
 # PAGE CONFIG
@@ -13,10 +15,22 @@ st.set_page_config(
 
 
 # ============================================================
+# HTML RENDER FUNCTION
+# IMPORTANT: dedent removes indentation before rendering HTML
+# ============================================================
+
+def render_html(content):
+    st.markdown(
+        textwrap.dedent(content),
+        unsafe_allow_html=True
+    )
+
+
+# ============================================================
 # GLOBAL CSS
 # ============================================================
 
-st.markdown("""
+render_html("""
 <style>
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
@@ -33,7 +47,6 @@ html, body, [class*="css"] {
     color: white;
 }
 
-/* Hide Streamlit default elements */
 #MainMenu {
     visibility: hidden;
 }
@@ -46,12 +59,12 @@ header {
     visibility: hidden;
 }
 
-/* Main container */
 .block-container {
     max-width: 1250px;
     padding-top: 2rem;
     padding-bottom: 3rem;
 }
+
 
 /* ============================================================
    HERO
@@ -117,7 +130,7 @@ header {
 
 .section-title {
     margin-top: 55px;
-    margin-bottom: 25px;
+    margin-bottom: 12px;
 
     color: #ffffff;
     font-size: 28px;
@@ -127,7 +140,6 @@ header {
 .section-line {
     width: 70px;
     height: 4px;
-    margin-top: -15px;
     margin-bottom: 30px;
 
     border-radius: 10px;
@@ -202,41 +214,13 @@ header {
 
 
 /* ============================================================
-   OBJECTIVE CARDS
-   ============================================================ */
-
-.objective {
-    height: 100%;
-    padding: 25px;
-
-    border-radius: 20px;
-
-    background: rgba(18, 21, 31, 0.96);
-
-    border: 1px solid rgba(100, 120, 180, 0.18);
-}
-
-.objective h3 {
-    color: white;
-    font-size: 20px;
-    margin: 0 0 10px 0;
-}
-
-.objective p {
-    color: #aeb4c2;
-    font-size: 14px;
-    line-height: 1.75;
-    margin: 0;
-}
-
-
-/* ============================================================
    WORKFLOW
    ============================================================ */
 
 .workflow-card {
     min-height: 245px;
     padding: 25px;
+    margin-bottom: 20px;
 
     border-radius: 20px;
 
@@ -270,7 +254,7 @@ header {
     border-radius: 14px;
 
     background: rgba(229, 9, 20, 0.13);
-    border: 1px solid rgba(229, 9, 20, 0.3);
+    border: 1px solid rgba(229, 9, 20, 0.30);
 
     color: #ff5963;
     font-size: 15px;
@@ -300,6 +284,8 @@ header {
 
 .tech-card {
     padding: 25px;
+    margin-bottom: 20px;
+
     text-align: center;
 
     border-radius: 20px;
@@ -328,6 +314,8 @@ header {
 
 .team-card {
     padding: 28px;
+    margin-bottom: 20px;
+
     text-align: center;
 
     border-radius: 22px;
@@ -390,7 +378,6 @@ header {
 table {
     width: 100%;
     min-width: 750px;
-
     border-collapse: collapse;
 }
 
@@ -558,14 +545,14 @@ tbody tr:hover {
 }
 
 </style>
-""", unsafe_allow_html=True)
+""")
 
 
 # ============================================================
 # HERO
 # ============================================================
 
-st.markdown("""
+render_html("""
 <div class="hero">
 
     <div class="badge">
@@ -583,27 +570,28 @@ st.markdown("""
     </p>
 
 </div>
-""", unsafe_allow_html=True)
+""")
 
 
 # ============================================================
 # PROJECT INTRODUCTION
 # ============================================================
 
-st.markdown("""
+render_html("""
 <div class="section-title">
     🎬 Project Introduction
 </div>
 
 <div class="section-line"></div>
-""", unsafe_allow_html=True)
+""")
 
 
 col1, col2 = st.columns(2)
 
+
 with col1:
 
-    st.markdown("""
+    render_html("""
     <div class="card">
 
         <div class="card-icon">
@@ -648,12 +636,12 @@ with col1:
         </p>
 
     </div>
-    """, unsafe_allow_html=True)
+    """)
 
 
 with col2:
 
-    st.markdown("""
+    render_html("""
     <div class="card">
 
         <div class="card-icon">
@@ -694,86 +682,77 @@ with col2:
         </p>
 
     </div>
-    """, unsafe_allow_html=True)
+    """)
 
 
 # ============================================================
 # WORKFLOW
 # ============================================================
 
-st.markdown("""
+render_html("""
 <div class="section-title">
     ⚙️ How Our System Works
 </div>
 
 <div class="section-line"></div>
-""", unsafe_allow_html=True)
+""")
 
 
 workflow = [
-
     (
         "01",
         "Data Collection",
         "Movie information is collected from the movie dataset."
     ),
-
     (
         "02",
         "Data Cleaning",
         "Unnecessary information is removed and useful data is prepared."
     ),
-
     (
         "03",
         "Feature Selection",
         "Important features such as genres, keywords, cast and crew are selected."
     ),
-
     (
         "04",
         "Bag of Words",
         "Important textual features are combined to create a meaningful representation."
     ),
-
     (
         "05",
         "Vectorization",
         "Movie information is converted into numerical vectors."
     ),
-
     (
         "06",
         "Similarity Calculation",
         "Cosine similarity is used to calculate similarity between movies."
     ),
-
     (
         "07",
         "Recommendation",
         "Movies having the highest similarity are selected and displayed."
     ),
-
     (
         "08",
         "Deployment",
         "The final application is deployed as an interactive web application using Streamlit."
     )
-
 ]
 
 
-for i in range(0, len(workflow), 4):
+for start in range(0, len(workflow), 4):
 
     cols = st.columns(4)
 
-    for col, item in zip(cols, workflow[i:i+4]):
+    for col, item in zip(cols, workflow[start:start + 4]):
 
         number, title, description = item
 
         with col:
 
-            st.markdown(f"""
+            render_html(f"""
             <div class="workflow-card">
 
                 <div class="number">
@@ -789,74 +768,67 @@ for i in range(0, len(workflow), 4):
                 </p>
 
             </div>
-            """, unsafe_allow_html=True)
+            """)
 
 
 # ============================================================
-# REAL LIFE APPLICATIONS
+# REAL-LIFE APPLICATIONS
 # ============================================================
 
-st.markdown("""
+render_html("""
 <div class="section-title">
     🌐 Real-Life Applications
 </div>
 
 <div class="section-line"></div>
-""", unsafe_allow_html=True)
+""")
 
 
 applications = [
-
     (
         "🎥",
         "OTT Platforms",
         "Recommendation systems can help OTT platforms suggest movies and shows based on the content users are interested in."
     ),
-
     (
         "🍿",
         "Streaming Services",
         "Streaming platforms can help users discover relevant movies without searching through a large catalogue."
     ),
-
     (
         "🎬",
         "Movie Websites",
         "Movie websites can recommend similar movies when a user opens the details of a particular movie."
     ),
-
     (
         "📱",
         "Entertainment Apps",
         "Entertainment applications can personalize content discovery using recommendation algorithms."
     ),
-
     (
         "🛒",
         "E-Commerce",
         "The same recommendation concept can be applied to recommend products similar to a product selected by a customer."
     ),
-
     (
         "🎵",
         "Music Recommendation",
         "A similar content-based approach can recommend songs or artists based on their features."
     )
-
 ]
 
 
-for i in range(0, len(applications), 3):
+for start in range(0, len(applications), 3):
 
     cols = st.columns(3)
 
-    for col, item in zip(cols, applications[i:i+3]):
+    for col, item in zip(cols, applications[start:start + 3]):
 
         icon, title, description = item
 
         with col:
 
-            st.markdown(f"""
+            render_html(f"""
             <div class="card">
 
                 <div class="card-icon">
@@ -872,30 +844,28 @@ for i in range(0, len(applications), 3):
                 </p>
 
             </div>
-            """, unsafe_allow_html=True)
+            """)
 
 
 # ============================================================
 # TECHNOLOGIES
 # ============================================================
 
-st.markdown("""
+render_html("""
 <div class="section-title">
     💻 Technologies Used
 </div>
 
 <div class="section-line"></div>
-""", unsafe_allow_html=True)
+""")
 
 
 technologies = [
-
     ("🐍", "Python"),
     ("🤖", "Machine Learning"),
     ("📊", "Pandas"),
     ("🔢", "NumPy"),
     ("🌐", "Streamlit")
-
 ]
 
 
@@ -907,7 +877,7 @@ for col, item in zip(cols, technologies):
 
     with col:
 
-        st.markdown(f"""
+        render_html(f"""
         <div class="tech-card">
 
             <div class="tech-icon">
@@ -919,42 +889,38 @@ for col, item in zip(cols, technologies):
             </h3>
 
         </div>
-        """, unsafe_allow_html=True)
+        """)
 
 
 # ============================================================
 # PROJECT TEAM
 # ============================================================
 
-st.markdown("""
+render_html("""
 <div class="section-title">
     👥 Project Team
 </div>
 
 <div class="section-line"></div>
-""", unsafe_allow_html=True)
+""")
 
 
 team = [
-
     (
         "👤",
         "Anish (Abrar) Ahmad",
         "Mathematics / ML Logic"
     ),
-
     (
         "👤",
         "Abhishek Anish",
         "Coding / ML Implementation"
     ),
-
     (
         "👤",
         "Vishal",
         "Frontend / UI Development"
     )
-
 ]
 
 
@@ -966,7 +932,7 @@ for col, member in zip(cols, team):
 
     with col:
 
-        st.markdown(f"""
+        render_html(f"""
         <div class="team-card">
 
             <div class="team-icon">
@@ -982,44 +948,40 @@ for col, member in zip(cols, team):
             </p>
 
         </div>
-        """, unsafe_allow_html=True)
+        """)
 
 
 # ============================================================
 # TEAM CONTRIBUTION
 # ============================================================
 
-st.markdown("""
+render_html("""
 <div class="section-title">
     📊 Team Contribution
 </div>
 
 <div class="section-line"></div>
-""", unsafe_allow_html=True)
+""")
 
 
-st.markdown("""
+render_html("""
 <div class="note">
 
     <b>Note:</b>
 
-    <span class="yes-text">
-        YES
-    </span>
+    <span class="yes-text">YES</span>
     = Member is involved in that particular part.
 
     &nbsp;&nbsp;&nbsp;&nbsp;
 
-    <span class="no-text">
-        NO
-    </span>
+    <span class="no-text">NO</span>
     = Member is not involved in that particular part.
 
 </div>
-""", unsafe_allow_html=True)
+""")
 
 
-st.markdown("""
+render_html("""
 <div class="table-wrapper">
 
 <table>
@@ -1027,171 +989,108 @@ st.markdown("""
 <thead>
 
 <tr>
-
     <th>Project Work</th>
     <th>Anish</th>
     <th>Abhishek</th>
     <th>Vishal</th>
-
 </tr>
 
 </thead>
 
 <tbody>
 
-
 <tr>
-
     <td><b>To Make Recommendation System</b></td>
-
     <td><span class="no">✕ NO</span></td>
-
     <td><span class="no">✕ NO</span></td>
-
     <td><span class="no">✕ NO</span></td>
-
 </tr>
 
-
 <tr>
-
     <td><b>Data Collection</b></td>
-
     <td><span class="no">✕ NO</span></td>
-
     <td><span class="no">✕ NO</span></td>
-
     <td><span class="no">✕ NO</span></td>
-
 </tr>
 
-
 <tr>
-
     <td><b>Data Cleaning</b></td>
-
     <td><span class="no">✕ NO</span></td>
-
     <td><span class="yes">✓ YES</span></td>
-
     <td><span class="no">✕ NO</span></td>
-
 </tr>
 
-
 <tr>
-
     <td><b>Bag of Words</b></td>
-
     <td><span class="yes">✓ YES</span></td>
-
     <td><span class="yes">✓ YES</span></td>
-
     <td><span class="no">✕ NO</span></td>
-
 </tr>
 
-
 <tr>
-
     <td><b>Similarity Matrix</b></td>
-
     <td><span class="yes">✓ YES</span></td>
-
     <td><span class="yes">✓ YES</span></td>
-
     <td><span class="no">✕ NO</span></td>
-
 </tr>
 
-
 <tr>
-
     <td><b>Vectorization</b></td>
-
     <td><span class="yes">✓ YES</span></td>
-
     <td><span class="yes">✓ YES</span></td>
-
     <td><span class="no">✕ NO</span></td>
-
 </tr>
 
-
 <tr>
-
     <td><b>Cosine Matrix</b></td>
-
     <td><span class="yes">✓ YES</span></td>
-
     <td><span class="yes">✓ YES</span></td>
-
     <td><span class="no">✕ NO</span></td>
-
 </tr>
 
-
 <tr>
-
     <td><b>Result</b></td>
-
     <td><span class="no">✕ NO</span></td>
-
     <td><span class="yes">✓ YES</span></td>
-
     <td><span class="yes">✓ YES</span></td>
-
 </tr>
 
-
 <tr>
-
     <td><b>Deployment</b></td>
-
     <td><span class="no">✕ NO</span></td>
-
     <td><span class="yes">✓ YES</span></td>
-
     <td><span class="no">✕ NO</span></td>
-
 </tr>
-
 
 <tr>
-
     <td><b>UI / Web Development</b></td>
-
     <td><span class="no">✕ NO</span></td>
-
     <td><span class="no">✕ NO</span></td>
-
     <td><span class="yes">✓ YES</span></td>
-
 </tr>
-
 
 </tbody>
 
 </table>
 
 </div>
-""", unsafe_allow_html=True)
+""")
 
 
 # ============================================================
 # DETAILED CONTRIBUTION
 # ============================================================
 
-st.markdown("""
+render_html("""
 <div class="section-title">
     📝 Detailed Contribution
 </div>
 
 <div class="section-line"></div>
-""", unsafe_allow_html=True)
+""")
 
 
-st.markdown("""
+render_html("""
 <div class="table-wrapper">
 
 <table>
@@ -1199,144 +1098,85 @@ st.markdown("""
 <thead>
 
 <tr>
-
     <th>Project Work</th>
     <th>Member</th>
     <th>Contribution</th>
-
 </tr>
 
 </thead>
 
 <tbody>
 
-
 <tr>
-
     <td><b>Data Cleaning</b></td>
-
     <td>Abhishek</td>
-
-    <td>
-        Data cleaning and preparation of useful movie information.
-    </td>
-
+    <td>Data cleaning and preparation of useful movie information.</td>
 </tr>
 
-
 <tr>
-
     <td><b>Bag of Words</b></td>
-
     <td>Anish &amp; Abhishek</td>
-
-    <td>
-        Creation of the textual feature representation used by the recommendation model.
-    </td>
-
+    <td>Creation of the textual feature representation used by the recommendation model.</td>
 </tr>
 
-
 <tr>
-
     <td><b>Similarity Matrix</b></td>
-
     <td>Anish &amp; Abhishek</td>
-
-    <td>
-        Calculation and preparation of movie similarity information.
-    </td>
-
+    <td>Calculation and preparation of movie similarity information.</td>
 </tr>
 
-
 <tr>
-
     <td><b>Vectorization</b></td>
-
     <td>Anish &amp; Abhishek</td>
-
-    <td>
-        Conversion of selected textual features into numerical vectors.
-    </td>
-
+    <td>Conversion of selected textual features into numerical vectors.</td>
 </tr>
 
-
 <tr>
-
     <td><b>Cosine Matrix</b></td>
-
     <td>Anish &amp; Abhishek</td>
-
-    <td>
-        Calculation of cosine similarity between movie vectors.
-    </td>
-
+    <td>Calculation of cosine similarity between movie vectors.</td>
 </tr>
 
-
 <tr>
-
     <td><b>Result</b></td>
-
     <td>Abhishek &amp; Vishal</td>
-
-    <td>
-        Displaying recommendation results through the application interface.
-    </td>
-
+    <td>Displaying recommendation results through the application interface.</td>
 </tr>
 
-
 <tr>
-
     <td><b>Deployment</b></td>
-
     <td>Abhishek</td>
-
-    <td>
-        Deployment and configuration of the Streamlit web application.
-    </td>
-
+    <td>Deployment and configuration of the Streamlit web application.</td>
 </tr>
-
 
 <tr>
-
     <td><b>UI / Web Development</b></td>
-
     <td>Vishal</td>
-
-    <td>
-        Frontend design and user-interface development.
-    </td>
-
+    <td>Frontend design and user-interface development.</td>
 </tr>
-
 
 </tbody>
 
 </table>
 
 </div>
-""", unsafe_allow_html=True)
+""")
 
 
 # ============================================================
 # PROJECT OUTCOME
 # ============================================================
 
-st.markdown("""
+render_html("""
 <div class="section-title">
     🏆 Project Outcome
 </div>
 
 <div class="section-line"></div>
-""", unsafe_allow_html=True)
+""")
 
 
-st.markdown("""
+render_html("""
 <div class="outcome">
 
     <h3>
@@ -1373,17 +1213,18 @@ st.markdown("""
     </p>
 
 </div>
-""", unsafe_allow_html=True)
+""")
 
 
 # ============================================================
 # FOOTER
 # ============================================================
 
-st.markdown("""
+render_html("""
 <div class="custom-footer">
 
     🎬
+
     <br>
 
     <strong>
@@ -1405,4 +1246,4 @@ st.markdown("""
     <strong>Vishal</strong>
 
 </div>
-""", unsafe_allow_html=True)
+""")
