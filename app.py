@@ -1,5 +1,4 @@
 import streamlit as st
-import textwrap
 
 
 # ============================================================
@@ -15,36 +14,54 @@ st.set_page_config(
 
 
 # ============================================================
-# HTML RENDER FUNCTION
-# IMPORTANT: dedent removes indentation before rendering HTML
+# HTML HELPER
 # ============================================================
 
-def render_html(content):
-    st.markdown(
-        textwrap.dedent(content),
-        unsafe_allow_html=True
-    )
+def html(content):
+    st.html(content)
 
 
 # ============================================================
 # GLOBAL CSS
 # ============================================================
 
-render_html("""
+html("""
 <style>
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
-html, body, [class*="css"] {
+* {
+    box-sizing: border-box;
+}
+
+html, body {
     font-family: 'Poppins', sans-serif;
 }
 
 .stApp {
     background:
-        radial-gradient(circle at 10% 10%, rgba(229, 9, 20, 0.12), transparent 25%),
-        radial-gradient(circle at 90% 30%, rgba(90, 30, 180, 0.10), transparent 25%),
-        linear-gradient(135deg, #05060b 0%, #080a12 50%, #05060b 100%);
+        radial-gradient(
+            circle at 5% 5%,
+            rgba(229, 9, 20, 0.13),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 95% 30%,
+            rgba(100, 50, 180, 0.10),
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #05060b 0%,
+            #080a12 50%,
+            #05060b 100%
+        );
+
     color: white;
+}
+
+header {
+    visibility: hidden;
 }
 
 #MainMenu {
@@ -55,14 +72,10 @@ footer {
     visibility: hidden;
 }
 
-header {
-    visibility: hidden;
-}
-
 .block-container {
     max-width: 1250px;
-    padding-top: 2rem;
-    padding-bottom: 3rem;
+    padding-top: 25px;
+    padding-bottom: 60px;
 }
 
 
@@ -71,118 +84,137 @@ header {
    ============================================================ */
 
 .hero {
+    width: 100%;
     padding: 65px 35px;
-    margin-bottom: 45px;
-    border-radius: 28px;
+    margin-bottom: 55px;
+
     text-align: center;
+
+    border-radius: 28px;
 
     background:
         linear-gradient(
             135deg,
-            rgba(229, 9, 20, 0.18),
-            rgba(15, 18, 30, 0.96)
+            rgba(229, 9, 20, 0.20),
+            rgba(15, 18, 30, 0.97)
         );
 
-    border: 1px solid rgba(229, 9, 20, 0.35);
+    border: 1px solid rgba(229, 9, 20, 0.40);
 
     box-shadow:
-        0 0 40px rgba(229, 9, 20, 0.12),
-        inset 0 0 40px rgba(255,255,255,0.015);
+        0 0 45px rgba(229, 9, 20, 0.12),
+        inset 0 0 35px rgba(255,255,255,0.015);
 }
 
 .badge {
     display: inline-block;
+
     padding: 9px 18px;
     margin-bottom: 20px;
 
     border-radius: 50px;
 
     background: rgba(229, 9, 20, 0.14);
+
     border: 1px solid rgba(229, 9, 20, 0.45);
 
-    color: #ff6670;
+    color: #ff6872;
+
     font-size: 13px;
     font-weight: 700;
+
     letter-spacing: 1px;
 }
 
 .hero h1 {
     margin: 0;
+
     color: #ffffff;
-    font-size: clamp(32px, 5vw, 62px);
+
+    font-size: clamp(34px, 5vw, 62px);
+
     font-weight: 800;
+
     line-height: 1.15;
 }
 
 .hero p {
     max-width: 850px;
-    margin: 22px auto 0 auto;
+
+    margin: 22px auto 0;
 
     color: #b9becb;
+
     font-size: 16px;
+
     line-height: 1.8;
 }
 
 
 /* ============================================================
-   SECTION TITLE
+   SECTION
    ============================================================ */
 
-.section-title {
+.section {
     margin-top: 55px;
-    margin-bottom: 12px;
+    margin-bottom: 30px;
+}
+
+.section-title {
+    margin: 0;
 
     color: #ffffff;
+
     font-size: 28px;
+
     font-weight: 800;
 }
 
 .section-line {
-    width: 70px;
+    width: 72px;
     height: 4px;
-    margin-bottom: 30px;
+
+    margin-top: 13px;
 
     border-radius: 10px;
+
     background: #e50914;
 }
 
 
 /* ============================================================
-   GENERAL CARD
+   CARD
    ============================================================ */
 
 .card {
-    height: 100%;
+    width: 100%;
+
+    min-height: 100%;
+
     padding: 28px;
 
-    border-radius: 20px;
+    border-radius: 22px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(22, 25, 36, 0.98),
-            rgba(12, 14, 22, 0.98)
+            rgba(23, 26, 37, 0.98),
+            rgba(11, 13, 21, 0.98)
         );
 
     border: 1px solid rgba(100, 120, 180, 0.20);
 
     box-shadow:
-        0 10px 35px rgba(0,0,0,0.25),
-        inset 0 0 20px rgba(255,255,255,0.015);
-}
-
-.card:hover {
-    border-color: rgba(229, 9, 20, 0.45);
-    box-shadow:
-        0 10px 40px rgba(229, 9, 20, 0.10),
-        inset 0 0 20px rgba(255,255,255,0.02);
+        0 12px 35px rgba(0,0,0,0.25),
+        inset 0 0 20px rgba(255,255,255,0.012);
 }
 
 .card-icon {
-    width: 55px;
-    height: 55px;
+    width: 56px;
+    height: 56px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -191,24 +223,29 @@ header {
     border-radius: 16px;
 
     background: rgba(229, 9, 20, 0.12);
-    border: 1px solid rgba(229, 9, 20, 0.25);
 
-    font-size: 27px;
+    border: 1px solid rgba(229, 9, 20, 0.28);
+
+    font-size: 28px;
 }
 
 .card h3 {
-    margin: 0 0 15px 0;
+    margin: 0 0 16px;
 
     color: #ffffff;
+
     font-size: 21px;
+
     font-weight: 700;
 }
 
 .card p {
     margin: 0;
 
-    color: #aeb4c2;
+    color: #aeb5c3;
+
     font-size: 14px;
+
     line-height: 1.85;
 }
 
@@ -217,10 +254,10 @@ header {
    WORKFLOW
    ============================================================ */
 
-.workflow-card {
+.workflow {
     min-height: 245px;
+
     padding: 25px;
-    margin-bottom: 20px;
 
     border-radius: 20px;
 
@@ -233,11 +270,12 @@ header {
 
     border: 1px solid rgba(100, 120, 180, 0.18);
 
-    transition: 0.25s ease;
+    transition: transform 0.25s ease;
 }
 
-.workflow-card:hover {
-    transform: translateY(-3px);
+.workflow:hover {
+    transform: translateY(-4px);
+
     border-color: rgba(229, 9, 20, 0.45);
 }
 
@@ -246,6 +284,7 @@ header {
     height: 48px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -254,27 +293,92 @@ header {
     border-radius: 14px;
 
     background: rgba(229, 9, 20, 0.13);
+
     border: 1px solid rgba(229, 9, 20, 0.30);
 
     color: #ff5963;
+
     font-size: 15px;
+
     font-weight: 800;
 }
 
-.workflow-card h4 {
-    margin: 0 0 12px 0;
+.workflow h4 {
+    margin: 0 0 12px;
 
     color: #ffffff;
+
     font-size: 18px;
+
     font-weight: 700;
 }
 
-.workflow-card p {
+.workflow p {
     margin: 0;
 
     color: #9fa6b5;
+
     font-size: 13px;
+
     line-height: 1.7;
+}
+
+
+/* ============================================================
+   APPLICATION CARD
+   ============================================================ */
+
+.application {
+    min-height: 255px;
+
+    padding: 27px;
+
+    border-radius: 21px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(22, 25, 36, 0.98),
+            rgba(11, 13, 21, 0.98)
+        );
+
+    border: 1px solid rgba(100, 120, 180, 0.18);
+}
+
+.application-icon {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    border-radius: 16px;
+
+    background: rgba(229, 9, 20, 0.12);
+
+    font-size: 27px;
+}
+
+.application h3 {
+    margin: 0 0 12px;
+
+    color: white;
+
+    font-size: 19px;
+}
+
+.application p {
+    margin: 0;
+
+    color: #aeb4c2;
+
+    font-size: 13px;
+
+    line-height: 1.75;
 }
 
 
@@ -282,8 +386,9 @@ header {
    TECHNOLOGY
    ============================================================ */
 
-.tech-card {
+.tech {
     padding: 25px;
+
     margin-bottom: 20px;
 
     text-align: center;
@@ -296,14 +401,16 @@ header {
 }
 
 .tech-icon {
-    font-size: 35px;
+    font-size: 36px;
+
     margin-bottom: 12px;
 }
 
-.tech-card h3 {
+.tech h3 {
     margin: 0;
 
-    color: white;
+    color: #ffffff;
+
     font-size: 17px;
 }
 
@@ -312,8 +419,9 @@ header {
    TEAM
    ============================================================ */
 
-.team-card {
-    padding: 28px;
+.team {
+    padding: 30px;
+
     margin-bottom: 20px;
 
     text-align: center;
@@ -331,93 +439,39 @@ header {
 }
 
 .team-icon {
-    width: 70px;
-    height: 70px;
+    width: 72px;
+    height: 72px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    margin: 0 auto 18px auto;
+    margin: 0 auto 18px;
 
     border-radius: 50%;
 
     background: rgba(229, 9, 20, 0.12);
+
     border: 1px solid rgba(229, 9, 20, 0.30);
 
     font-size: 30px;
 }
 
-.team-card h3 {
+.team h3 {
+    margin: 0 0 8px;
+
     color: white;
+
     font-size: 18px;
-    margin: 0 0 8px 0;
 }
 
-.team-card p {
-    color: #a7adba;
-    font-size: 13px;
+.team p {
     margin: 0;
-}
 
-
-/* ============================================================
-   TABLE
-   ============================================================ */
-
-.table-wrapper {
-    width: 100%;
-    overflow-x: auto;
-
-    border-radius: 18px;
-    border: 1px solid rgba(100, 120, 180, 0.18);
-
-    background: rgba(12, 15, 23, 0.98);
-}
-
-table {
-    width: 100%;
-    min-width: 750px;
-    border-collapse: collapse;
-}
-
-thead th {
-    padding: 17px 15px;
-
-    background: rgba(229, 9, 20, 0.12);
-
-    color: #ffffff;
+    color: #a7adba;
 
     font-size: 13px;
-    font-weight: 700;
-
-    border-bottom: 1px solid rgba(229, 9, 20, 0.25);
-}
-
-tbody td {
-    padding: 16px 15px;
-
-    color: #c2c7d2;
-
-    font-size: 13px;
-
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-
-tbody tr:hover {
-    background: rgba(255,255,255,0.025);
-}
-
-.yes {
-    color: #48f2a5;
-    font-weight: 700;
-    white-space: nowrap;
-}
-
-.no {
-    color: #ff7185;
-    font-weight: 700;
-    white-space: nowrap;
 }
 
 
@@ -426,27 +480,102 @@ tbody tr:hover {
    ============================================================ */
 
 .note {
+    padding: 16px 18px;
+
     margin-bottom: 20px;
-    padding: 15px 18px;
 
     border-radius: 14px;
 
     background: rgba(255,255,255,0.035);
 
-    border: 1px solid rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.08);
 
     color: #aeb4c2;
+
     font-size: 13px;
 }
 
-.note .yes-text {
+.yes-text {
     color: #48f2a5;
+
     font-weight: 700;
 }
 
-.note .no-text {
+.no-text {
     color: #ff7185;
+
     font-weight: 700;
+}
+
+
+/* ============================================================
+   TABLE
+   ============================================================ */
+
+.table-box {
+    width: 100%;
+
+    overflow-x: auto;
+
+    border-radius: 18px;
+
+    background: #0c0f17;
+
+    border: 1px solid rgba(100,120,180,0.18);
+}
+
+table {
+    width: 100%;
+
+    min-width: 760px;
+
+    border-collapse: collapse;
+}
+
+th {
+    padding: 17px 15px;
+
+    background: rgba(229,9,20,0.12);
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    text-align: left;
+
+    border-bottom: 1px solid rgba(229,9,20,0.25);
+}
+
+td {
+    padding: 16px 15px;
+
+    color: #c3c8d2;
+
+    font-size: 13px;
+
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+tr:hover td {
+    background: rgba(255,255,255,0.025);
+}
+
+.yes {
+    color: #48f2a5;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.no {
+    color: #ff7185;
+
+    font-weight: 700;
+
+    white-space: nowrap;
 }
 
 
@@ -457,27 +586,33 @@ tbody tr:hover {
 .outcome {
     padding: 32px;
 
-    border-radius: 22px;
+    border-radius: 23px;
 
     background:
         linear-gradient(
             135deg,
-            rgba(229, 9, 20, 0.12),
-            rgba(20, 23, 34, 0.98)
+            rgba(229,9,20,0.13),
+            rgba(20,23,34,0.98)
         );
 
-    border: 1px solid rgba(229, 9, 20, 0.25);
+    border: 1px solid rgba(229,9,20,0.25);
 }
 
 .outcome h3 {
-    color: white;
-    font-size: 22px;
-    margin-top: 0;
+    margin: 0 0 16px;
+
+    color: #ffffff;
+
+    font-size: 23px;
 }
 
 .outcome p {
+    margin: 0;
+
     color: #b3bac7;
+
     font-size: 14px;
+
     line-height: 1.9;
 }
 
@@ -488,6 +623,7 @@ tbody tr:hover {
 
 .custom-footer {
     margin-top: 65px;
+
     padding: 30px;
 
     text-align: center;
@@ -497,6 +633,7 @@ tbody tr:hover {
     color: #8d94a3;
 
     font-size: 13px;
+
     line-height: 1.8;
 }
 
@@ -514,11 +651,11 @@ tbody tr:hover {
     .block-container {
         padding-left: 12px;
         padding-right: 12px;
-        padding-top: 1rem;
+        padding-top: 15px;
     }
 
     .hero {
-        padding: 40px 20px;
+        padding: 42px 20px;
         border-radius: 22px;
     }
 
@@ -535,10 +672,10 @@ tbody tr:hover {
     }
 
     .card {
-        padding: 22px;
+        padding: 23px;
     }
 
-    .workflow-card {
+    .workflow {
         min-height: auto;
     }
 
@@ -552,7 +689,7 @@ tbody tr:hover {
 # HERO
 # ============================================================
 
-render_html("""
+html("""
 <div class="hero">
 
     <div class="badge">
@@ -577,12 +714,16 @@ render_html("""
 # PROJECT INTRODUCTION
 # ============================================================
 
-render_html("""
-<div class="section-title">
-    🎬 Project Introduction
-</div>
+html("""
+<div class="section">
 
-<div class="section-line"></div>
+    <div class="section-title">
+        🎬 Project Introduction
+    </div>
+
+    <div class="section-line"></div>
+
+</div>
 """)
 
 
@@ -591,7 +732,7 @@ col1, col2 = st.columns(2)
 
 with col1:
 
-    render_html("""
+    html("""
     <div class="card">
 
         <div class="card-icon">
@@ -641,7 +782,7 @@ with col1:
 
 with col2:
 
-    render_html("""
+    html("""
     <div class="card">
 
         <div class="card-icon">
@@ -689,60 +830,73 @@ with col2:
 # WORKFLOW
 # ============================================================
 
-render_html("""
-<div class="section-title">
-    ⚙️ How Our System Works
-</div>
+html("""
+<div class="section">
 
-<div class="section-line"></div>
+    <div class="section-title">
+        ⚙️ How Our System Works
+    </div>
+
+    <div class="section-line"></div>
+
+</div>
 """)
 
 
 workflow = [
+
     (
         "01",
         "Data Collection",
         "Movie information is collected from the movie dataset."
     ),
+
     (
         "02",
         "Data Cleaning",
         "Unnecessary information is removed and useful data is prepared."
     ),
+
     (
         "03",
         "Feature Selection",
         "Important features such as genres, keywords, cast and crew are selected."
     ),
+
     (
         "04",
         "Bag of Words",
         "Important textual features are combined to create a meaningful representation."
     ),
+
     (
         "05",
         "Vectorization",
         "Movie information is converted into numerical vectors."
     ),
+
     (
         "06",
         "Similarity Calculation",
         "Cosine similarity is used to calculate similarity between movies."
     ),
+
     (
         "07",
         "Recommendation",
         "Movies having the highest similarity are selected and displayed."
     ),
+
     (
         "08",
         "Deployment",
         "The final application is deployed as an interactive web application using Streamlit."
     )
+
 ]
 
 
-for start in range(0, len(workflow), 4):
+for start in range(0, 8, 4):
 
     cols = st.columns(4)
 
@@ -752,8 +906,8 @@ for start in range(0, len(workflow), 4):
 
         with col:
 
-            render_html(f"""
-            <div class="workflow-card">
+            html(f"""
+            <div class="workflow">
 
                 <div class="number">
                     {number}
@@ -772,53 +926,64 @@ for start in range(0, len(workflow), 4):
 
 
 # ============================================================
-# REAL-LIFE APPLICATIONS
+# REAL LIFE APPLICATIONS
 # ============================================================
 
-render_html("""
-<div class="section-title">
-    🌐 Real-Life Applications
-</div>
+html("""
+<div class="section">
 
-<div class="section-line"></div>
+    <div class="section-title">
+        🌐 Real-Life Applications
+    </div>
+
+    <div class="section-line"></div>
+
+</div>
 """)
 
 
 applications = [
+
     (
         "🎥",
         "OTT Platforms",
         "Recommendation systems can help OTT platforms suggest movies and shows based on the content users are interested in."
     ),
+
     (
         "🍿",
         "Streaming Services",
         "Streaming platforms can help users discover relevant movies without searching through a large catalogue."
     ),
+
     (
         "🎬",
         "Movie Websites",
         "Movie websites can recommend similar movies when a user opens the details of a particular movie."
     ),
+
     (
         "📱",
         "Entertainment Apps",
         "Entertainment applications can personalize content discovery using recommendation algorithms."
     ),
+
     (
         "🛒",
         "E-Commerce",
         "The same recommendation concept can be applied to recommend products similar to a product selected by a customer."
     ),
+
     (
         "🎵",
         "Music Recommendation",
         "A similar content-based approach can recommend songs or artists based on their features."
     )
+
 ]
 
 
-for start in range(0, len(applications), 3):
+for start in range(0, 6, 3):
 
     cols = st.columns(3)
 
@@ -828,10 +993,10 @@ for start in range(0, len(applications), 3):
 
         with col:
 
-            render_html(f"""
-            <div class="card">
+            html(f"""
+            <div class="application">
 
-                <div class="card-icon">
+                <div class="application-icon">
                     {icon}
                 </div>
 
@@ -851,25 +1016,32 @@ for start in range(0, len(applications), 3):
 # TECHNOLOGIES
 # ============================================================
 
-render_html("""
-<div class="section-title">
-    💻 Technologies Used
-</div>
+html("""
+<div class="section">
 
-<div class="section-line"></div>
+    <div class="section-title">
+        💻 Technologies Used
+    </div>
+
+    <div class="section-line"></div>
+
+</div>
 """)
 
 
 technologies = [
+
     ("🐍", "Python"),
     ("🤖", "Machine Learning"),
     ("📊", "Pandas"),
     ("🔢", "NumPy"),
     ("🌐", "Streamlit")
+
 ]
 
 
 cols = st.columns(5)
+
 
 for col, item in zip(cols, technologies):
 
@@ -877,8 +1049,8 @@ for col, item in zip(cols, technologies):
 
     with col:
 
-        render_html(f"""
-        <div class="tech-card">
+        html(f"""
+        <div class="tech">
 
             <div class="tech-icon">
                 {icon}
@@ -896,35 +1068,44 @@ for col, item in zip(cols, technologies):
 # PROJECT TEAM
 # ============================================================
 
-render_html("""
-<div class="section-title">
-    👥 Project Team
-</div>
+html("""
+<div class="section">
 
-<div class="section-line"></div>
+    <div class="section-title">
+        👥 Project Team
+    </div>
+
+    <div class="section-line"></div>
+
+</div>
 """)
 
 
 team = [
+
     (
         "👤",
         "Anish (Abrar) Ahmad",
         "Mathematics / ML Logic"
     ),
+
     (
         "👤",
         "Abhishek Anish",
         "Coding / ML Implementation"
     ),
+
     (
         "👤",
         "Vishal",
         "Frontend / UI Development"
     )
+
 ]
 
 
 cols = st.columns(3)
+
 
 for col, member in zip(cols, team):
 
@@ -932,8 +1113,8 @@ for col, member in zip(cols, team):
 
     with col:
 
-        render_html(f"""
-        <div class="team-card">
+        html(f"""
+        <div class="team">
 
             <div class="team-icon">
                 {icon}
@@ -955,16 +1136,20 @@ for col, member in zip(cols, team):
 # TEAM CONTRIBUTION
 # ============================================================
 
-render_html("""
-<div class="section-title">
-    📊 Team Contribution
-</div>
+html("""
+<div class="section">
 
-<div class="section-line"></div>
+    <div class="section-title">
+        📊 Team Contribution
+    </div>
+
+    <div class="section-line"></div>
+
+</div>
 """)
 
 
-render_html("""
+html("""
 <div class="note">
 
     <b>Note:</b>
@@ -981,8 +1166,8 @@ render_html("""
 """)
 
 
-render_html("""
-<div class="table-wrapper">
+html("""
+<div class="table-box">
 
 <table>
 
@@ -1081,17 +1266,21 @@ render_html("""
 # DETAILED CONTRIBUTION
 # ============================================================
 
-render_html("""
-<div class="section-title">
-    📝 Detailed Contribution
-</div>
+html("""
+<div class="section">
 
-<div class="section-line"></div>
+    <div class="section-title">
+        📝 Detailed Contribution
+    </div>
+
+    <div class="section-line"></div>
+
+</div>
 """)
 
 
-render_html("""
-<div class="table-wrapper">
+html("""
+<div class="table-box">
 
 <table>
 
@@ -1167,16 +1356,20 @@ render_html("""
 # PROJECT OUTCOME
 # ============================================================
 
-render_html("""
-<div class="section-title">
-    🏆 Project Outcome
-</div>
+html("""
+<div class="section">
 
-<div class="section-line"></div>
+    <div class="section-title">
+        🏆 Project Outcome
+    </div>
+
+    <div class="section-line"></div>
+
+</div>
 """)
 
 
-render_html("""
+html("""
 <div class="outcome">
 
     <h3>
@@ -1220,7 +1413,7 @@ render_html("""
 # FOOTER
 # ============================================================
 
-render_html("""
+html("""
 <div class="custom-footer">
 
     🎬
