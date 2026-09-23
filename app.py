@@ -14,7 +14,7 @@ st.set_page_config(
 
 
 # ============================================================
-# HTML HELPER
+# HTML RENDER FUNCTION
 # ============================================================
 
 def html(content):
@@ -85,7 +85,9 @@ footer {
 
 .hero {
     width: 100%;
+
     padding: 65px 35px;
+
     margin-bottom: 55px;
 
     text-align: center;
@@ -110,6 +112,7 @@ footer {
     display: inline-block;
 
     padding: 9px 18px;
+
     margin-bottom: 20px;
 
     border-radius: 50px;
@@ -121,6 +124,7 @@ footer {
     color: #ff6872;
 
     font-size: 13px;
+
     font-weight: 700;
 
     letter-spacing: 1px;
@@ -157,6 +161,7 @@ footer {
 
 .section {
     margin-top: 55px;
+
     margin-bottom: 30px;
 }
 
@@ -172,6 +177,7 @@ footer {
 
 .section-line {
     width: 72px;
+
     height: 4px;
 
     margin-top: 13px;
@@ -183,7 +189,7 @@ footer {
 
 
 /* ============================================================
-   CARD
+   GENERAL CARD
    ============================================================ */
 
 .card {
@@ -211,11 +217,13 @@ footer {
 
 .card-icon {
     width: 56px;
+
     height: 56px;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     margin-bottom: 18px;
@@ -281,11 +289,13 @@ footer {
 
 .number {
     width: 48px;
+
     height: 48px;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     margin-bottom: 18px;
@@ -325,7 +335,7 @@ footer {
 
 
 /* ============================================================
-   APPLICATION CARD
+   APPLICATION
    ============================================================ */
 
 .application {
@@ -347,11 +357,13 @@ footer {
 
 .application-icon {
     width: 55px;
+
     height: 55px;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     margin-bottom: 18px;
@@ -383,7 +395,7 @@ footer {
 
 
 /* ============================================================
-   TECHNOLOGY
+   TECHNOLOGIES
    ============================================================ */
 
 .tech {
@@ -420,7 +432,7 @@ footer {
    ============================================================ */
 
 .team {
-    padding: 30px;
+    padding: 28px 20px;
 
     margin-bottom: 20px;
 
@@ -436,18 +448,22 @@ footer {
         );
 
     border: 1px solid rgba(100, 120, 180, 0.18);
+
+    min-height: 190px;
 }
 
 .team-icon {
-    width: 72px;
-    height: 72px;
+    width: 68px;
+
+    height: 68px;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
-    margin: 0 auto 18px;
+    margin: 0 auto 17px;
 
     border-radius: 50%;
 
@@ -455,7 +471,7 @@ footer {
 
     border: 1px solid rgba(229, 9, 20, 0.30);
 
-    font-size: 30px;
+    font-size: 29px;
 }
 
 .team h3 {
@@ -463,7 +479,7 @@ footer {
 
     color: white;
 
-    font-size: 18px;
+    font-size: 17px;
 }
 
 .team p {
@@ -471,7 +487,9 @@ footer {
 
     color: #a7adba;
 
-    font-size: 13px;
+    font-size: 12px;
+
+    line-height: 1.6;
 }
 
 
@@ -527,7 +545,7 @@ footer {
 table {
     width: 100%;
 
-    min-width: 760px;
+    min-width: 900px;
 
     border-collapse: collapse;
 }
@@ -650,12 +668,15 @@ tr:hover td {
 
     .block-container {
         padding-left: 12px;
+
         padding-right: 12px;
+
         padding-top: 15px;
     }
 
     .hero {
         padding: 42px 20px;
+
         border-radius: 22px;
     }
 
@@ -926,7 +947,7 @@ for start in range(0, 8, 4):
 
 
 # ============================================================
-# REAL LIFE APPLICATIONS
+# REAL-LIFE APPLICATIONS
 # ============================================================
 
 html("""
@@ -1081,30 +1102,38 @@ html("""
 """)
 
 
+# CORRECT 4 MEMBERS
+
 team = [
 
     (
-        "👤",
-        "Anish (Abrar) Ahmad",
-        "Mathematics / ML Logic"
+        "👔",
+        "Abar Ahmad",
+        "Special Project Manager"
     ),
 
     (
-        "👤",
-        "Abhishek Anish",
-        "Coding / ML Implementation"
+        "👨‍💻",
+        "Anish",
+        "Team Leader & Coder"
     ),
 
     (
-        "👤",
+        "🧮",
+        "Abhishek",
+        "Mathematical Logic"
+    ),
+
+    (
+        "🎨",
         "Vishal",
-        "Frontend / UI Development"
+        "Frontend"
     )
 
 ]
 
 
-cols = st.columns(3)
+cols = st.columns(4)
 
 
 for col, member in zip(cols, team):
@@ -1166,6 +1195,10 @@ html("""
 """)
 
 
+# ============================================================
+# CONTRIBUTION TABLE
+# ============================================================
+
 html("""
 <div class="table-box">
 
@@ -1175,6 +1208,7 @@ html("""
 
 <tr>
     <th>Project Work</th>
+    <th>Abar Ahmad</th>
     <th>Anish</th>
     <th>Abhishek</th>
     <th>Vishal</th>
@@ -1185,73 +1219,252 @@ html("""
 <tbody>
 
 <tr>
-    <td><b>To Make Recommendation System</b></td>
-    <td><span class="no">✕ NO</span></td>
-    <td><span class="no">✕ NO</span></td>
-    <td><span class="no">✕ NO</span></td>
+
+    <td>
+        <b>To Make Recommendation System</b>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
 </tr>
 
-<tr>
-    <td><b>Data Collection</b></td>
-    <td><span class="no">✕ NO</span></td>
-    <td><span class="no">✕ NO</span></td>
-    <td><span class="no">✕ NO</span></td>
-</tr>
 
 <tr>
-    <td><b>Data Cleaning</b></td>
-    <td><span class="no">✕ NO</span></td>
-    <td><span class="yes">✓ YES</span></td>
-    <td><span class="no">✕ NO</span></td>
+
+    <td>
+        <b>Data Collection</b>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
 </tr>
 
-<tr>
-    <td><b>Bag of Words</b></td>
-    <td><span class="yes">✓ YES</span></td>
-    <td><span class="yes">✓ YES</span></td>
-    <td><span class="no">✕ NO</span></td>
-</tr>
 
 <tr>
-    <td><b>Similarity Matrix</b></td>
-    <td><span class="yes">✓ YES</span></td>
-    <td><span class="yes">✓ YES</span></td>
-    <td><span class="no">✕ NO</span></td>
+
+    <td>
+        <b>Data Cleaning</b>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
+    <td>
+        <span class="yes">✓ YES</span>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
 </tr>
 
-<tr>
-    <td><b>Vectorization</b></td>
-    <td><span class="yes">✓ YES</span></td>
-    <td><span class="yes">✓ YES</span></td>
-    <td><span class="no">✕ NO</span></td>
-</tr>
 
 <tr>
-    <td><b>Cosine Matrix</b></td>
-    <td><span class="yes">✓ YES</span></td>
-    <td><span class="yes">✓ YES</span></td>
-    <td><span class="no">✕ NO</span></td>
+
+    <td>
+        <b>Bag of Words</b>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
+    <td>
+        <span class="yes">✓ YES</span>
+    </td>
+
+    <td>
+        <span class="yes">✓ YES</span>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
 </tr>
 
-<tr>
-    <td><b>Result</b></td>
-    <td><span class="no">✕ NO</span></td>
-    <td><span class="yes">✓ YES</span></td>
-    <td><span class="yes">✓ YES</span></td>
-</tr>
 
 <tr>
-    <td><b>Deployment</b></td>
-    <td><span class="no">✕ NO</span></td>
-    <td><span class="yes">✓ YES</span></td>
-    <td><span class="no">✕ NO</span></td>
+
+    <td>
+        <b>Similarity Matrix</b>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
+    <td>
+        <span class="yes">✓ YES</span>
+    </td>
+
+    <td>
+        <span class="yes">✓ YES</span>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
 </tr>
 
+
 <tr>
-    <td><b>UI / Web Development</b></td>
-    <td><span class="no">✕ NO</span></td>
-    <td><span class="no">✕ NO</span></td>
-    <td><span class="yes">✓ YES</span></td>
+
+    <td>
+        <b>Vectorization</b>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
+    <td>
+        <span class="yes">✓ YES</span>
+    </td>
+
+    <td>
+        <span class="yes">✓ YES</span>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
+</tr>
+
+
+<tr>
+
+    <td>
+        <b>Cosine Matrix</b>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
+    <td>
+        <span class="yes">✓ YES</span>
+    </td>
+
+    <td>
+        <span class="yes">✓ YES</span>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
+</tr>
+
+
+<tr>
+
+    <td>
+        <b>Result</b>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
+    <td>
+        <span class="yes">✓ YES</span>
+    </td>
+
+    <td>
+        <span class="yes">✓ YES</span>
+    </td>
+
+</tr>
+
+
+<tr>
+
+    <td>
+        <b>Deployment</b>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
+    <td>
+        <span class="yes">✓ YES</span>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
+</tr>
+
+
+<tr>
+
+    <td>
+        <b>UI / Web Development</b>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
+    <td>
+        <span class="no">✕ NO</span>
+    </td>
+
+    <td>
+        <span class="yes">✓ YES</span>
+    </td>
+
 </tr>
 
 </tbody>
@@ -1296,53 +1509,160 @@ html("""
 
 <tbody>
 
-<tr>
-    <td><b>Data Cleaning</b></td>
-    <td>Abhishek</td>
-    <td>Data cleaning and preparation of useful movie information.</td>
-</tr>
 
 <tr>
-    <td><b>Bag of Words</b></td>
-    <td>Anish &amp; Abhishek</td>
-    <td>Creation of the textual feature representation used by the recommendation model.</td>
+
+    <td>
+        <b>Data Cleaning</b>
+    </td>
+
+    <td>
+        Abhishek
+    </td>
+
+    <td>
+        Data cleaning and preparation of useful movie information.
+    </td>
+
 </tr>
 
-<tr>
-    <td><b>Similarity Matrix</b></td>
-    <td>Anish &amp; Abhishek</td>
-    <td>Calculation and preparation of movie similarity information.</td>
-</tr>
 
 <tr>
-    <td><b>Vectorization</b></td>
-    <td>Anish &amp; Abhishek</td>
-    <td>Conversion of selected textual features into numerical vectors.</td>
+
+    <td>
+        <b>Bag of Words</b>
+    </td>
+
+    <td>
+        Anish &amp; Abhishek
+    </td>
+
+    <td>
+        Creation of the textual feature representation used by
+        the recommendation model.
+    </td>
+
 </tr>
 
-<tr>
-    <td><b>Cosine Matrix</b></td>
-    <td>Anish &amp; Abhishek</td>
-    <td>Calculation of cosine similarity between movie vectors.</td>
-</tr>
 
 <tr>
-    <td><b>Result</b></td>
-    <td>Abhishek &amp; Vishal</td>
-    <td>Displaying recommendation results through the application interface.</td>
+
+    <td>
+        <b>Similarity Matrix</b>
+    </td>
+
+    <td>
+        Anish &amp; Abhishek
+    </td>
+
+    <td>
+        Calculation and preparation of movie similarity information.
+    </td>
+
 </tr>
 
-<tr>
-    <td><b>Deployment</b></td>
-    <td>Abhishek</td>
-    <td>Deployment and configuration of the Streamlit web application.</td>
-</tr>
 
 <tr>
-    <td><b>UI / Web Development</b></td>
-    <td>Vishal</td>
-    <td>Frontend design and user-interface development.</td>
+
+    <td>
+        <b>Vectorization</b>
+    </td>
+
+    <td>
+        Anish &amp; Abhishek
+    </td>
+
+    <td>
+        Conversion of selected textual features into numerical vectors.
+    </td>
+
 </tr>
+
+
+<tr>
+
+    <td>
+        <b>Cosine Matrix</b>
+    </td>
+
+    <td>
+        Anish &amp; Abhishek
+    </td>
+
+    <td>
+        Calculation of cosine similarity between movie vectors.
+    </td>
+
+</tr>
+
+
+<tr>
+
+    <td>
+        <b>Result</b>
+    </td>
+
+    <td>
+        Abhishek &amp; Vishal
+    </td>
+
+    <td>
+        Displaying recommendation results through the application interface.
+    </td>
+
+</tr>
+
+
+<tr>
+
+    <td>
+        <b>Deployment</b>
+    </td>
+
+    <td>
+        Abhishek
+    </td>
+
+    <td>
+        Deployment and configuration of the Streamlit web application.
+    </td>
+
+</tr>
+
+
+<tr>
+
+    <td>
+        <b>UI / Web Development</b>
+    </td>
+
+    <td>
+        Vishal
+    </td>
+
+    <td>
+        Frontend design and user-interface development.
+    </td>
+
+</tr>
+
+
+<tr>
+
+    <td>
+        <b>Project Management</b>
+    </td>
+
+    <td>
+        Abar Ahmad
+    </td>
+
+    <td>
+        Special project management and overall project coordination.
+    </td>
+
+</tr>
+
 
 </tbody>
 
@@ -1432,6 +1752,8 @@ html("""
 
     Developed by
 
+    <strong>Abar Ahmad</strong>
+    •
     <strong>Anish</strong>
     •
     <strong>Abhishek</strong>
