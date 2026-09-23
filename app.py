@@ -11,504 +11,548 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+
 # ============================================================
-# CSS
+# GLOBAL CSS
 # ============================================================
 
 st.markdown("""
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
-* {
-    font-family: 'Inter', sans-serif;
+html, body, [class*="css"] {
+    font-family: 'Poppins', sans-serif;
 }
 
 .stApp {
     background:
-        radial-gradient(circle at 5% 5%, rgba(255, 0, 70, .15), transparent 25%),
-        radial-gradient(circle at 95% 5%, rgba(100, 30, 255, .15), transparent 25%),
-        linear-gradient(135deg, #02040a, #070b17, #02040a);
+        radial-gradient(circle at 10% 10%, rgba(229, 9, 20, 0.12), transparent 25%),
+        radial-gradient(circle at 90% 30%, rgba(90, 30, 180, 0.10), transparent 25%),
+        linear-gradient(135deg, #05060b 0%, #080a12 50%, #05060b 100%);
     color: white;
 }
 
+/* Hide Streamlit default elements */
+#MainMenu {
+    visibility: hidden;
+}
+
+footer {
+    visibility: hidden;
+}
+
+header {
+    visibility: hidden;
+}
+
+/* Main container */
 .block-container {
-    max-width: 1450px;
-    padding: 25px 25px 40px;
+    max-width: 1250px;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
 }
 
 /* ============================================================
    HERO
-============================================================ */
+   ============================================================ */
 
 .hero {
+    padding: 65px 35px;
+    margin-bottom: 45px;
+    border-radius: 28px;
     text-align: center;
-    padding: 42px 25px;
-    margin-bottom: 25px;
-
-    border: 1px solid rgba(255, 50, 120, .45);
-    border-radius: 25px;
 
     background:
-        radial-gradient(
-            circle at 10% 50%,
-            rgba(255, 0, 70, .20),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 90% 50%,
-            rgba(100, 30, 255, .20),
-            transparent 30%
-        ),
-        rgba(5, 8, 20, .92);
+        linear-gradient(
+            135deg,
+            rgba(229, 9, 20, 0.18),
+            rgba(15, 18, 30, 0.96)
+        );
+
+    border: 1px solid rgba(229, 9, 20, 0.35);
 
     box-shadow:
-        0 0 50px rgba(255, 0, 80, .10);
+        0 0 40px rgba(229, 9, 20, 0.12),
+        inset 0 0 40px rgba(255,255,255,0.015);
 }
 
 .badge {
     display: inline-block;
+    padding: 9px 18px;
+    margin-bottom: 20px;
 
-    padding: 9px 20px;
+    border-radius: 50px;
 
-    border-radius: 30px;
+    background: rgba(229, 9, 20, 0.14);
+    border: 1px solid rgba(229, 9, 20, 0.45);
 
-    background:
-        linear-gradient(
-            90deg,
-            #ff1744,
-            #d500f9
-        );
-
-    color: white;
-
+    color: #ff6670;
     font-size: 13px;
-    font-weight: 800;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 .hero h1 {
-    margin: 15px 0 10px;
-
-    font-size: clamp(35px, 5vw, 60px);
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(32px, 5vw, 62px);
     font-weight: 800;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ffffff,
-            #ff719f,
-            #bd7cff
-        );
-
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    line-height: 1.15;
 }
 
 .hero p {
     max-width: 850px;
+    margin: 22px auto 0 auto;
 
-    margin: auto;
-
-    color: #cdd3e5;
-
-    font-size: 15px;
-
-    line-height: 1.7;
+    color: #b9becb;
+    font-size: 16px;
+    line-height: 1.8;
 }
+
 
 /* ============================================================
    SECTION TITLE
-============================================================ */
+   ============================================================ */
 
 .section-title {
-    display: flex;
+    margin-top: 55px;
+    margin-bottom: 25px;
 
-    align-items: center;
-
-    gap: 10px;
-
-    margin-top: 28px;
-    margin-bottom: 15px;
-
-    padding-bottom: 8px;
-
-    border-bottom:
-        1px solid rgba(255,255,255,.10);
-}
-
-.section-title .emoji {
-    font-size: 25px;
-}
-
-.section-title h2 {
-    margin: 0;
-
-    font-size: 23px;
+    color: #ffffff;
+    font-size: 28px;
     font-weight: 800;
 }
 
+.section-line {
+    width: 70px;
+    height: 4px;
+    margin-top: -15px;
+    margin-bottom: 30px;
+
+    border-radius: 10px;
+    background: #e50914;
+}
+
+
 /* ============================================================
-   CARD
-============================================================ */
+   GENERAL CARD
+   ============================================================ */
 
 .card {
-    padding: 20px;
+    height: 100%;
+    padding: 28px;
 
-    border:
-        1px solid rgba(100,130,255,.35);
-
-    border-radius: 16px;
+    border-radius: 20px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(15,22,45,.95),
-            rgba(5,9,22,.95)
+            rgba(22, 25, 36, 0.98),
+            rgba(12, 14, 22, 0.98)
         );
 
-    box-shadow:
-        0 8px 25px rgba(0,0,0,.25);
+    border: 1px solid rgba(100, 120, 180, 0.20);
 
-    margin-bottom: 12px;
+    box-shadow:
+        0 10px 35px rgba(0,0,0,0.25),
+        inset 0 0 20px rgba(255,255,255,0.015);
 }
 
 .card:hover {
-    border-color:
-        rgba(255,70,150,.65);
-
-    transform: translateY(-2px);
-
-    transition: .2s;
+    border-color: rgba(229, 9, 20, 0.45);
+    box-shadow:
+        0 10px 40px rgba(229, 9, 20, 0.10),
+        inset 0 0 20px rgba(255,255,255,0.02);
 }
 
 .card-icon {
-    font-size: 32px;
+    width: 55px;
+    height: 55px;
 
-    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    border-radius: 16px;
+
+    background: rgba(229, 9, 20, 0.12);
+    border: 1px solid rgba(229, 9, 20, 0.25);
+
+    font-size: 27px;
 }
 
 .card h3 {
-    margin: 0 0 10px;
+    margin: 0 0 15px 0;
 
-    font-size: 17px;
+    color: #ffffff;
+    font-size: 21px;
+    font-weight: 700;
 }
 
 .card p {
     margin: 0;
 
-    color: #c9d0e2;
-
-    font-size: 13px;
-
-    line-height: 1.65;
+    color: #aeb4c2;
+    font-size: 14px;
+    line-height: 1.85;
 }
+
+
+/* ============================================================
+   OBJECTIVE CARDS
+   ============================================================ */
+
+.objective {
+    height: 100%;
+    padding: 25px;
+
+    border-radius: 20px;
+
+    background: rgba(18, 21, 31, 0.96);
+
+    border: 1px solid rgba(100, 120, 180, 0.18);
+}
+
+.objective h3 {
+    color: white;
+    font-size: 20px;
+    margin: 0 0 10px 0;
+}
+
+.objective p {
+    color: #aeb4c2;
+    font-size: 14px;
+    line-height: 1.75;
+    margin: 0;
+}
+
 
 /* ============================================================
    WORKFLOW
-============================================================ */
-
-.workflow {
-    display: grid;
-
-    grid-template-columns:
-        repeat(8, minmax(120px, 1fr));
-
-    gap: 10px;
-}
+   ============================================================ */
 
 .workflow-card {
-    min-height: 170px;
+    min-height: 245px;
+    padding: 25px;
 
-    padding: 14px;
-
-    border:
-        1px solid rgba(80,150,255,.35);
-
-    border-radius: 14px;
-
-    background:
-        rgba(8,15,31,.95);
-}
-
-.number {
-    display: flex;
-
-    width: 34px;
-    height: 34px;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
+    border-radius: 20px;
 
     background:
         linear-gradient(
-            135deg,
-            #ff1744,
-            #7c4dff
+            145deg,
+            rgba(20, 23, 34, 0.98),
+            rgba(10, 12, 20, 0.98)
         );
 
-    font-size: 12px;
+    border: 1px solid rgba(100, 120, 180, 0.18);
 
+    transition: 0.25s ease;
+}
+
+.workflow-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(229, 9, 20, 0.45);
+}
+
+.number {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    border-radius: 14px;
+
+    background: rgba(229, 9, 20, 0.13);
+    border: 1px solid rgba(229, 9, 20, 0.3);
+
+    color: #ff5963;
+    font-size: 15px;
     font-weight: 800;
-
-    margin-bottom: 10px;
 }
 
 .workflow-card h4 {
-    margin: 0 0 8px;
+    margin: 0 0 12px 0;
 
-    font-size: 14px;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
 }
 
 .workflow-card p {
     margin: 0;
 
-    color: #b9c2d8;
-
-    font-size: 11px;
-
-    line-height: 1.5;
+    color: #9fa6b5;
+    font-size: 13px;
+    line-height: 1.7;
 }
+
+
+/* ============================================================
+   TECHNOLOGY
+   ============================================================ */
+
+.tech-card {
+    padding: 25px;
+    text-align: center;
+
+    border-radius: 20px;
+
+    background: rgba(18, 21, 31, 0.96);
+
+    border: 1px solid rgba(100, 120, 180, 0.18);
+}
+
+.tech-icon {
+    font-size: 35px;
+    margin-bottom: 12px;
+}
+
+.tech-card h3 {
+    margin: 0;
+
+    color: white;
+    font-size: 17px;
+}
+
+
+/* ============================================================
+   TEAM
+   ============================================================ */
+
+.team-card {
+    padding: 28px;
+    text-align: center;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(22, 25, 36, 0.98),
+            rgba(11, 13, 21, 0.98)
+        );
+
+    border: 1px solid rgba(100, 120, 180, 0.18);
+}
+
+.team-icon {
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 18px auto;
+
+    border-radius: 50%;
+
+    background: rgba(229, 9, 20, 0.12);
+    border: 1px solid rgba(229, 9, 20, 0.30);
+
+    font-size: 30px;
+}
+
+.team-card h3 {
+    color: white;
+    font-size: 18px;
+    margin: 0 0 8px 0;
+}
+
+.team-card p {
+    color: #a7adba;
+    font-size: 13px;
+    margin: 0;
+}
+
 
 /* ============================================================
    TABLE
-============================================================ */
+   ============================================================ */
 
-.table-box {
+.table-wrapper {
     width: 100%;
-
     overflow-x: auto;
 
-    border:
-        1px solid rgba(255,50,110,.40);
+    border-radius: 18px;
+    border: 1px solid rgba(100, 120, 180, 0.18);
 
-    border-radius: 16px;
-
-    background:
-        rgba(4,9,20,.95);
+    background: rgba(12, 15, 23, 0.98);
 }
 
-.contribution-table {
+table {
     width: 100%;
-
-    min-width: 720px;
+    min-width: 750px;
 
     border-collapse: collapse;
 }
 
-.contribution-table th {
-    padding: 14px 12px;
+thead th {
+    padding: 17px 15px;
 
-    background:
-        linear-gradient(
-            90deg,
-            rgba(255,0,70,.18),
-            rgba(100,30,255,.18)
-        );
+    background: rgba(229, 9, 20, 0.12);
 
-    color: white;
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    border-bottom: 1px solid rgba(229, 9, 20, 0.25);
+}
+
+tbody td {
+    padding: 16px 15px;
+
+    color: #c2c7d2;
 
     font-size: 13px;
 
-    text-align: center;
-
-    border-bottom:
-        1px solid rgba(255,255,255,.12);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
-.contribution-table th:first-child {
-    text-align: left;
-}
-
-.contribution-table td {
-    padding: 11px 12px;
-
-    color: #d8ddec;
-
-    font-size: 12px;
-
-    text-align: center;
-
-    border-bottom:
-        1px solid rgba(255,255,255,.07);
-}
-
-.contribution-table td:first-child {
-    text-align: left;
-}
-
-.contribution-table tr:hover td {
-    background:
-        rgba(255,255,255,.035);
+tbody tr:hover {
+    background: rgba(255,255,255,0.025);
 }
 
 .yes {
-    display: inline-block;
-
-    padding: 5px 11px;
-
-    border-radius: 20px;
-
-    color: #45f3a2;
-
-    background:
-        rgba(0,220,120,.13);
-
-    border:
-        1px solid rgba(0,240,140,.40);
-
+    color: #48f2a5;
     font-weight: 700;
+    white-space: nowrap;
 }
 
 .no {
-    display: inline-block;
-
-    padding: 5px 11px;
-
-    border-radius: 20px;
-
     color: #ff7185;
+    font-weight: 700;
+    white-space: nowrap;
+}
 
-    background:
-        rgba(255,30,60,.12);
 
-    border:
-        1px solid rgba(255,50,80,.35);
+/* ============================================================
+   NOTE
+   ============================================================ */
 
+.note {
+    margin-bottom: 20px;
+    padding: 15px 18px;
+
+    border-radius: 14px;
+
+    background: rgba(255,255,255,0.035);
+
+    border: 1px solid rgba(255,255,255,0.07);
+
+    color: #aeb4c2;
+    font-size: 13px;
+}
+
+.note .yes-text {
+    color: #48f2a5;
     font-weight: 700;
 }
 
-/* ============================================================
-   DETAIL TABLE
-============================================================ */
-
-.detail-table {
-    width: 100%;
-
-    min-width: 700px;
-
-    border-collapse: collapse;
+.note .no-text {
+    color: #ff7185;
+    font-weight: 700;
 }
 
-.detail-table th {
-    padding: 13px;
-
-    color: #ff7ca7;
-
-    text-align: left;
-
-    background:
-        rgba(255,0,80,.10);
-}
-
-.detail-table td {
-    padding: 12px;
-
-    color: #d5dbea;
-
-    font-size: 12px;
-
-    border-bottom:
-        1px solid rgba(255,255,255,.07);
-}
-
-.detail-table tr:hover td {
-    background:
-        rgba(255,255,255,.03);
-}
 
 /* ============================================================
    OUTCOME
-============================================================ */
+   ============================================================ */
 
 .outcome {
-    padding: 22px;
+    padding: 32px;
 
-    border:
-        1px solid rgba(255,40,110,.45);
-
-    border-radius: 17px;
+    border-radius: 22px;
 
     background:
         linear-gradient(
-            90deg,
-            rgba(255,0,70,.10),
-            rgba(100,30,255,.10)
+            135deg,
+            rgba(229, 9, 20, 0.12),
+            rgba(20, 23, 34, 0.98)
         );
+
+    border: 1px solid rgba(229, 9, 20, 0.25);
 }
 
 .outcome h3 {
+    color: white;
+    font-size: 22px;
     margin-top: 0;
 }
 
 .outcome p {
-    color: #cbd2e3;
-
-    font-size: 13px;
-
-    line-height: 1.7;
+    color: #b3bac7;
+    font-size: 14px;
+    line-height: 1.9;
 }
+
 
 /* ============================================================
    FOOTER
-============================================================ */
+   ============================================================ */
 
-.footer {
-    margin-top: 30px;
-
-    padding: 25px;
+.custom-footer {
+    margin-top: 65px;
+    padding: 30px;
 
     text-align: center;
 
-    color: #9fa8bd;
+    border-top: 1px solid rgba(255,255,255,0.08);
 
-    font-size: 12px;
+    color: #8d94a3;
 
-    border-top:
-        1px solid rgba(255,255,255,.08);
+    font-size: 13px;
+    line-height: 1.8;
 }
 
-.footer strong {
-    color: #ff719e;
+.custom-footer strong {
+    color: #ffffff;
 }
+
 
 /* ============================================================
    MOBILE
-============================================================ */
+   ============================================================ */
 
-@media (max-width: 1100px) {
-
-    .workflow {
-        grid-template-columns:
-            repeat(4, 1fr);
-    }
-}
-
-@media (max-width: 700px) {
+@media (max-width: 768px) {
 
     .block-container {
-        padding: 15px 10px 30px;
+        padding-left: 12px;
+        padding-right: 12px;
+        padding-top: 1rem;
     }
 
     .hero {
-        padding: 30px 15px;
+        padding: 40px 20px;
+        border-radius: 22px;
     }
 
     .hero h1 {
         font-size: 34px;
     }
 
-    .workflow {
-        grid-template-columns:
-            repeat(2, 1fr);
+    .hero p {
+        font-size: 13px;
     }
-}
 
-@media (max-width: 450px) {
+    .section-title {
+        font-size: 23px;
+    }
 
-    .workflow {
-        grid-template-columns: 1fr;
+    .card {
+        padding: 22px;
+    }
+
+    .workflow-card {
+        min-height: auto;
     }
 
 }
@@ -548,15 +592,16 @@ st.markdown("""
 
 st.markdown("""
 <div class="section-title">
-    <div class="emoji">🎬</div>
-    <h2>Project Introduction</h2>
+    🎬 Project Introduction
 </div>
+
+<div class="section-line"></div>
 """, unsafe_allow_html=True)
 
-intro_col, objective_col = st.columns([1.4, 1])
 
+col1, col2 = st.columns(2)
 
-with intro_col:
+with col1:
 
     st.markdown("""
     <div class="card">
@@ -570,6 +615,7 @@ with intro_col:
         </h3>
 
         <p>
+
             A Movie Recommendation System is a Machine Learning based
             system that helps users discover movies according to their
             interests.
@@ -598,13 +644,14 @@ with intro_col:
 
             When a user selects a movie, the system compares that movie
             with other movies and displays the most similar movies.
+
         </p>
 
     </div>
     """, unsafe_allow_html=True)
 
 
-with objective_col:
+with col2:
 
     st.markdown("""
     <div class="card">
@@ -656,13 +703,14 @@ with objective_col:
 
 st.markdown("""
 <div class="section-title">
-    <div class="emoji">⚙️</div>
-    <h2>How Our System Works</h2>
+    ⚙️ How Our System Works
 </div>
+
+<div class="section-line"></div>
 """, unsafe_allow_html=True)
 
 
-workflow_data = [
+workflow = [
 
     (
         "01",
@@ -715,41 +763,33 @@ workflow_data = [
 ]
 
 
-workflow_html = """
-<div class="workflow">
-"""
+for i in range(0, len(workflow), 4):
 
+    cols = st.columns(4)
 
-for number, title, description in workflow_data:
+    for col, item in zip(cols, workflow[i:i+4]):
 
-    workflow_html += f"""
-    <div class="workflow-card">
+        number, title, description = item
 
-        <div class="number">
-            {number}
-        </div>
+        with col:
 
-        <h4>
-            {title}
-        </h4>
+            st.markdown(f"""
+            <div class="workflow-card">
 
-        <p>
-            {description}
-        </p>
+                <div class="number">
+                    {number}
+                </div>
 
-    </div>
-    """
+                <h4>
+                    {title}
+                </h4>
 
+                <p>
+                    {description}
+                </p>
 
-workflow_html += """
-</div>
-"""
-
-
-st.markdown(
-    workflow_html,
-    unsafe_allow_html=True
-)
+            </div>
+            """, unsafe_allow_html=True)
 
 
 # ============================================================
@@ -758,9 +798,10 @@ st.markdown(
 
 st.markdown("""
 <div class="section-title">
-    <div class="emoji">🌐</div>
-    <h2>Real-Life Applications</h2>
+    🌐 Real-Life Applications
 </div>
+
+<div class="section-line"></div>
 """, unsafe_allow_html=True)
 
 
@@ -773,27 +814,27 @@ applications = [
     ),
 
     (
-        "🎬",
-        "Movie Websites",
-        "Movie websites can recommend similar movies when a user opens the details of a particular movie."
-    ),
-
-    (
-        "🛒",
-        "E-Commerce",
-        "The same recommendation concept can be applied to recommend products similar to a product selected by a customer."
-    ),
-
-    (
         "🍿",
         "Streaming Services",
         "Streaming platforms can help users discover relevant movies without searching through a large catalogue."
     ),
 
     (
+        "🎬",
+        "Movie Websites",
+        "Movie websites can recommend similar movies when a user opens the details of a particular movie."
+    ),
+
+    (
         "📱",
         "Entertainment Apps",
         "Entertainment applications can personalize content discovery using recommendation algorithms."
+    ),
+
+    (
+        "🛒",
+        "E-Commerce",
+        "The same recommendation concept can be applied to recommend products similar to a product selected by a customer."
     ),
 
     (
@@ -805,30 +846,33 @@ applications = [
 ]
 
 
-application_columns = st.columns(3)
+for i in range(0, len(applications), 3):
 
+    cols = st.columns(3)
 
-for index, (icon, title, description) in enumerate(applications):
+    for col, item in zip(cols, applications[i:i+3]):
 
-    with application_columns[index % 3]:
+        icon, title, description = item
 
-        st.markdown(f"""
-        <div class="card">
+        with col:
 
-            <div class="card-icon">
-                {icon}
+            st.markdown(f"""
+            <div class="card">
+
+                <div class="card-icon">
+                    {icon}
+                </div>
+
+                <h3>
+                    {title}
+                </h3>
+
+                <p>
+                    {description}
+                </p>
+
             </div>
-
-            <h3>
-                {title}
-            </h3>
-
-            <p>
-                {description}
-            </p>
-
-        </div>
-        """, unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
 
 
 # ============================================================
@@ -837,9 +881,10 @@ for index, (icon, title, description) in enumerate(applications):
 
 st.markdown("""
 <div class="section-title">
-    <div class="emoji">💻</div>
-    <h2>Technologies Used</h2>
+    💻 Technologies Used
 </div>
+
+<div class="section-line"></div>
 """, unsafe_allow_html=True)
 
 
@@ -854,23 +899,18 @@ technologies = [
 ]
 
 
-technology_columns = st.columns(5)
+cols = st.columns(5)
 
+for col, item in zip(cols, technologies):
 
-for column, (icon, name) in zip(
-    technology_columns,
-    technologies
-):
+    icon, name = item
 
-    with column:
+    with col:
 
         st.markdown(f"""
-        <div
-            class="card"
-            style="text-align:center; min-height:110px;"
-        >
+        <div class="tech-card">
 
-            <div class="card-icon">
+            <div class="tech-icon">
                 {icon}
             </div>
 
@@ -888,25 +928,29 @@ for column, (icon, name) in zip(
 
 st.markdown("""
 <div class="section-title">
-    <div class="emoji">👥</div>
-    <h2>Project Team</h2>
+    👥 Project Team
 </div>
+
+<div class="section-line"></div>
 """, unsafe_allow_html=True)
 
 
-team_members = [
+team = [
 
     (
+        "👤",
         "Anish (Abrar) Ahmad",
         "Mathematics / ML Logic"
     ),
 
     (
+        "👤",
         "Abhishek Anish",
         "Coding / ML Implementation"
     ),
 
     (
+        "👤",
         "Vishal",
         "Frontend / UI Development"
     )
@@ -914,24 +958,19 @@ team_members = [
 ]
 
 
-team_columns = st.columns(3)
+cols = st.columns(3)
 
+for col, member in zip(cols, team):
 
-for column, (name, role) in zip(
-    team_columns,
-    team_members
-):
+    icon, name, role = member
 
-    with column:
+    with col:
 
         st.markdown(f"""
-        <div
-            class="card"
-            style="text-align:center;"
-        >
+        <div class="team-card">
 
-            <div class="card-icon">
-                👤
+            <div class="team-icon">
+                {icon}
             </div>
 
             <h3>
@@ -952,25 +991,26 @@ for column, (name, role) in zip(
 
 st.markdown("""
 <div class="section-title">
-    <div class="emoji">📊</div>
-    <h2>Team Contribution</h2>
+    📊 Team Contribution
 </div>
+
+<div class="section-line"></div>
 """, unsafe_allow_html=True)
 
 
 st.markdown("""
-<div class="card">
+<div class="note">
 
     <b>Note:</b>
 
-    <span style="color:#48f2a5;">
+    <span class="yes-text">
         YES
     </span>
     = Member is involved in that particular part.
 
     &nbsp;&nbsp;&nbsp;&nbsp;
 
-    <span style="color:#ff7185;">
+    <span class="no-text">
         NO
     </span>
     = Member is not involved in that particular part.
@@ -979,120 +1019,158 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# ============================================================
-# CONTRIBUTION DATA
-# ============================================================
+st.markdown("""
+<div class="table-wrapper">
 
-contributions = [
+<table>
 
-    ("To Make Recommendation System", "No", "No", "No"),
+<thead>
 
-    ("Data Collection", "No", "No", "No"),
+<tr>
 
-    ("Data Cleaning", "No", "Yes", "No"),
+    <th>Project Work</th>
+    <th>Anish</th>
+    <th>Abhishek</th>
+    <th>Vishal</th>
 
-    ("Bag of Words", "Yes", "Yes", "No"),
+</tr>
 
-    ("Similarity Matrix", "Yes", "Yes", "No"),
+</thead>
 
-    ("Vectorization", "Yes", "Yes", "No"),
-
-    ("Cosine Matrix", "Yes", "Yes", "No"),
-
-    ("Result", "No", "Yes", "Yes"),
-
-    ("Deployment", "No", "Yes", "No"),
-
-    ("UI / Web Development", "No", "No", "Yes")
-
-]
+<tbody>
 
 
-def make_status(value):
+<tr>
 
-    if value.lower() == "yes":
+    <td><b>To Make Recommendation System</b></td>
 
-        return """
-        <span class="yes">
-            ✓ YES
-        </span>
-        """
+    <td><span class="no">✕ NO</span></td>
 
-    return """
-    <span class="no">
-        ✕ NO
-    </span>
-    """
+    <td><span class="no">✕ NO</span></td>
+
+    <td><span class="no">✕ NO</span></td>
+
+</tr>
 
 
-table_rows = ""
+<tr>
+
+    <td><b>Data Collection</b></td>
+
+    <td><span class="no">✕ NO</span></td>
+
+    <td><span class="no">✕ NO</span></td>
+
+    <td><span class="no">✕ NO</span></td>
+
+</tr>
 
 
-for work, anish, abhishek, vishal in contributions:
+<tr>
 
-    table_rows += f"""
-    <tr>
+    <td><b>Data Cleaning</b></td>
 
-        <td>
-            <b>
-                {work}
-            </b>
-        </td>
+    <td><span class="no">✕ NO</span></td>
 
-        <td>
-            {make_status(anish)}
-        </td>
+    <td><span class="yes">✓ YES</span></td>
 
-        <td>
-            {make_status(abhishek)}
-        </td>
+    <td><span class="no">✕ NO</span></td>
 
-        <td>
-            {make_status(vishal)}
-        </td>
-
-    </tr>
-    """
+</tr>
 
 
-# ============================================================
-# ACTUAL TABLE
-# ============================================================
+<tr>
 
-st.markdown(f"""
-<div class="table-box">
+    <td><b>Bag of Words</b></td>
 
-<table class="contribution-table">
+    <td><span class="yes">✓ YES</span></td>
 
-    <thead>
+    <td><span class="yes">✓ YES</span></td>
 
-        <tr>
+    <td><span class="no">✕ NO</span></td>
 
-            <th>
-                Project Work
-            </th>
+</tr>
 
-            <th>
-                Anish
-            </th>
 
-            <th>
-                Abhishek
-            </th>
+<tr>
 
-            <th>
-                Vishal
-            </th>
+    <td><b>Similarity Matrix</b></td>
 
-        </tr>
+    <td><span class="yes">✓ YES</span></td>
 
-    </thead>
+    <td><span class="yes">✓ YES</span></td>
 
-    <tbody>
+    <td><span class="no">✕ NO</span></td>
 
-        {table_rows}
+</tr>
 
-    </tbody>
+
+<tr>
+
+    <td><b>Vectorization</b></td>
+
+    <td><span class="yes">✓ YES</span></td>
+
+    <td><span class="yes">✓ YES</span></td>
+
+    <td><span class="no">✕ NO</span></td>
+
+</tr>
+
+
+<tr>
+
+    <td><b>Cosine Matrix</b></td>
+
+    <td><span class="yes">✓ YES</span></td>
+
+    <td><span class="yes">✓ YES</span></td>
+
+    <td><span class="no">✕ NO</span></td>
+
+</tr>
+
+
+<tr>
+
+    <td><b>Result</b></td>
+
+    <td><span class="no">✕ NO</span></td>
+
+    <td><span class="yes">✓ YES</span></td>
+
+    <td><span class="yes">✓ YES</span></td>
+
+</tr>
+
+
+<tr>
+
+    <td><b>Deployment</b></td>
+
+    <td><span class="no">✕ NO</span></td>
+
+    <td><span class="yes">✓ YES</span></td>
+
+    <td><span class="no">✕ NO</span></td>
+
+</tr>
+
+
+<tr>
+
+    <td><b>UI / Web Development</b></td>
+
+    <td><span class="no">✕ NO</span></td>
+
+    <td><span class="no">✕ NO</span></td>
+
+    <td><span class="yes">✓ YES</span></td>
+
+</tr>
+
+
+</tbody>
 
 </table>
 
@@ -1106,121 +1184,138 @@ st.markdown(f"""
 
 st.markdown("""
 <div class="section-title">
-    <div class="emoji">📝</div>
-    <h2>Detailed Contribution</h2>
+    📝 Detailed Contribution
 </div>
+
+<div class="section-line"></div>
 """, unsafe_allow_html=True)
 
 
-details = [
+st.markdown("""
+<div class="table-wrapper">
 
-    (
-        "Data Cleaning",
-        "Abhishek",
-        "Data cleaning and preparation of useful movie information."
-    ),
+<table>
 
-    (
-        "Bag of Words",
-        "Anish & Abhishek",
-        "Creation of the textual feature representation used by the recommendation model."
-    ),
+<thead>
 
-    (
-        "Similarity Matrix",
-        "Anish & Abhishek",
-        "Calculation and preparation of movie similarity information."
-    ),
+<tr>
 
-    (
-        "Vectorization",
-        "Anish & Abhishek",
-        "Conversion of selected textual features into numerical vectors."
-    ),
+    <th>Project Work</th>
+    <th>Member</th>
+    <th>Contribution</th>
 
-    (
-        "Cosine Matrix",
-        "Anish & Abhishek",
-        "Calculation of cosine similarity between movie vectors."
-    ),
+</tr>
 
-    (
-        "Result",
-        "Abhishek & Vishal",
-        "Displaying recommendation results through the application interface."
-    ),
+</thead>
 
-    (
-        "Deployment",
-        "Abhishek",
-        "Deployment and configuration of the Streamlit web application."
-    ),
-
-    (
-        "UI / Web Development",
-        "Vishal",
-        "Frontend design and user-interface development."
-    )
-
-]
+<tbody>
 
 
-detail_rows = ""
+<tr>
+
+    <td><b>Data Cleaning</b></td>
+
+    <td>Abhishek</td>
+
+    <td>
+        Data cleaning and preparation of useful movie information.
+    </td>
+
+</tr>
 
 
-for work, member, contribution in details:
+<tr>
 
-    detail_rows += f"""
-    <tr>
+    <td><b>Bag of Words</b></td>
 
-        <td>
-            <b>
-                {work}
-            </b>
-        </td>
+    <td>Anish &amp; Abhishek</td>
 
-        <td>
-            {member}
-        </td>
+    <td>
+        Creation of the textual feature representation used by the recommendation model.
+    </td>
 
-        <td>
-            {contribution}
-        </td>
-
-    </tr>
-    """
+</tr>
 
 
-st.markdown(f"""
-<div class="table-box">
+<tr>
 
-<table class="detail-table">
+    <td><b>Similarity Matrix</b></td>
 
-    <thead>
+    <td>Anish &amp; Abhishek</td>
 
-        <tr>
+    <td>
+        Calculation and preparation of movie similarity information.
+    </td>
 
-            <th>
-                Project Work
-            </th>
+</tr>
 
-            <th>
-                Member
-            </th>
 
-            <th>
-                Contribution
-            </th>
+<tr>
 
-        </tr>
+    <td><b>Vectorization</b></td>
 
-    </thead>
+    <td>Anish &amp; Abhishek</td>
 
-    <tbody>
+    <td>
+        Conversion of selected textual features into numerical vectors.
+    </td>
 
-        {detail_rows}
+</tr>
 
-    </tbody>
+
+<tr>
+
+    <td><b>Cosine Matrix</b></td>
+
+    <td>Anish &amp; Abhishek</td>
+
+    <td>
+        Calculation of cosine similarity between movie vectors.
+    </td>
+
+</tr>
+
+
+<tr>
+
+    <td><b>Result</b></td>
+
+    <td>Abhishek &amp; Vishal</td>
+
+    <td>
+        Displaying recommendation results through the application interface.
+    </td>
+
+</tr>
+
+
+<tr>
+
+    <td><b>Deployment</b></td>
+
+    <td>Abhishek</td>
+
+    <td>
+        Deployment and configuration of the Streamlit web application.
+    </td>
+
+</tr>
+
+
+<tr>
+
+    <td><b>UI / Web Development</b></td>
+
+    <td>Vishal</td>
+
+    <td>
+        Frontend design and user-interface development.
+    </td>
+
+</tr>
+
+
+</tbody>
 
 </table>
 
@@ -1234,9 +1329,10 @@ st.markdown(f"""
 
 st.markdown("""
 <div class="section-title">
-    <div class="emoji">🏆</div>
-    <h2>Project Outcome</h2>
+    🏆 Project Outcome
 </div>
+
+<div class="section-line"></div>
 """, unsafe_allow_html=True)
 
 
@@ -1285,9 +1381,11 @@ st.markdown("""
 # ============================================================
 
 st.markdown("""
-<div class="footer">
+<div class="custom-footer">
 
     🎬
+    <br>
+
     <strong>
         Movie Recommendation System
     </strong>
